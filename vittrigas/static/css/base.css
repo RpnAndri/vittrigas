@@ -1,0 +1,123 @@
+html, body {
+	/* font-family: 'Montserrat', sans-serif; */
+    font-family: 'Oswald', sans-serif;
+	/* font-family: "Comic Sans MS", "Comic Sans", cursive; */
+	color: black;
+    margin: 0px;
+    height: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas: 
+    "head"
+    "content"
+    "footer";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    min-height: 100vh;
+}
+
+.head {
+    grid-area: head;
+}
+.content {
+    grid-area: content;
+    flex: 1;
+}
+.footer {
+    grid-area: footer;
+    background-color: black;
+    padding: 1em;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+
+.navbar {
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+    align-items: center;
+}
+
+.nav-item a {
+    color: black;
+}
+
+#nav-logo {
+    font-size: 2em; /* Adjust as needed */
+    font-weight: bold;
+}
+
+.wrapper {
+    background-color: black;
+}
+
+.map {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.contact {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 150px;
+    margin-right: 150px;
+    color: white;
+}
+
+iframe {
+    height: 48vh;
+    width: 100%;
+}
+
+.info {
+    flex: 1;
+}
+
+.payment-cards {
+    width: 180px;
+    height: 25px;
+}
+
+.icon-container svg {
+    color: white;
+    width: 25px;
+    height: 25px;
+}
+
+.fa-item {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.mail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.email-newletter {
+    background-color: black;
+    border: none;
+    color: white;
+    outline: none;
+    padding: 15px 0;
+    width: 80%;
+}
+
+.company-info-list-head, .shopping-info-list-head, .contact-info-list-head, .newletter-list-head {
+    margin-bottom: 25px;
+}
+
+.list-item {
+    margin-bottom: 15px;
+}

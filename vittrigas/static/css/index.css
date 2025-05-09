@@ -1,6 +1,6 @@
 html {
-  font-size: -moz-calc(4px + 0.45vw);
-  font-size: -webkit-calc(4px + 0.45vw);
+  	font-size: -moz-calc(4px + 0.45vw);
+  	font-size: -webkit-calc(4px + 0.45vw);
 	font-size: calc(4px + 0.45vw);
 }
 body {
@@ -8,6 +8,7 @@ body {
 	/* font-family: "Comic Sans MS", "Comic Sans", cursive; */
 	color: #000;
 }
+
 a {
 	text-decoration: none;
 	color: #000;
