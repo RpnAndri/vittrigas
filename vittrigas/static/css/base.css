@@ -98,7 +98,9 @@ iframe {
     color: white;
     width: 25px;
     height: 25px;
+    padding-top: 15px;
 }
+
 
 .fa-item {
     color: #aaa;
@@ -116,8 +118,12 @@ iframe {
     border: none;
     color: white;
     outline: none;
-    padding: 15px 0;
+    padding-top: 15px;
     width: 80%;
+}
+
+hr {
+    margin-top: 0px;
 }
 
 .company-info-list-head, .shopping-info-list-head, .contact-info-list-head, .newletter-list-head {
