@@ -33,6 +33,7 @@ html, body {
 
 a {
 	text-decoration: none;
+    
 }
 
 ul {
@@ -46,10 +47,15 @@ ul {
 	display: flex;
 	justify-content: space-around;
     align-items: center;
+    margin: 50px;
 }
 
 .nav-item a {
     color: black;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
 #nav-logo {
