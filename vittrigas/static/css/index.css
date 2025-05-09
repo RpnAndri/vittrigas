@@ -160,6 +160,14 @@ nav {
 	background: #fff;
 	z-index: 2;
 }
+
+.navbar {
+	position: relative;
+	display: flex;
+	justify-content: space-around;
+	padding: 15px;
+}
+
 .prev, .next, .counter {
 	vertical-align: middle;
 }
