@@ -7,6 +7,16 @@
 
 {% block content %}
 
+<div class="container">
+    <h1 style="text-align:center;">Sign Up</h1>
+    <h3 style="text-align:center;">and start popping!</h3>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Sign Up" class="btn btn-default btn-kpop">
+
+    </form>
+</div>
+
 {% endblock %}
 
 {% block js %}

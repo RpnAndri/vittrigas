@@ -43,19 +43,33 @@ ul {
 }
 
 .navbar {
-	position: relative;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
     align-items: center;
     margin: 50px;
 }
 
-.nav-item a {
+.nav-left, .nav-right {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5.5vw;
+}
+
+
+.nav-item {
     color: black;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     font-weight: 900;
     letter-spacing: 2px;
+}
+
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #nav-logo {
