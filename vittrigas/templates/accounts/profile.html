@@ -7,6 +7,14 @@
 
 {% block content %}
 
+<!-- Code only available to the owner -->
+{% if user.is_authenticated and user == profile %}
+    <h1>YOU ARE THE OWNER</h1>
+{% endif %}
+
+<!-- Everyone can view the one below -->
+<h1>{{ profile.username }}</h1>
+
 {% endblock %}
 
 {% block js %}

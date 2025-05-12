@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from . views import Index, Login, SignUp
+from . views import Index, Login, SignUp, Profile
 
 
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('login/', Login.as_view(), name='login'),
     path('signup/', SignUp.as_view(), name='signup'),
+    path('profile/<str:username>/', Profile.as_view(), name='profile')
     # path('success/', Success.as_view(), name='success'),
 ]
