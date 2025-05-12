@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/accounts/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="signup-container">
+    <h1 style="text-align:center;">Sign Up</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+         <!-- Error Handling -->
+         {% if form.non_field_errors %}
+         <div class="field-error">
+             {% for error in form.non_field_errors %}
+                 <div>{{ error }}</div>
+             {% endfor %}
+         </div>
+        {% endif %}
+
+        <div class="email">
+            <label for="email">Email: </label>
+            <input type="email" name="email" required>
+            {% for error in form.email.errors %}
+                <div class="field-error">{{ error }}</div>
+            {% endfor %}
+
+        </div>
+        
+        <div class="username">
+            <label for="username">Username: </label>
+            <input type="text" name="username" required>
+            {% for error in form.username.errors %}
+                <div class="field-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="password1">
+            <label for="password1">Password: </label>
+            <input type="password" name="password1" required>
+            {% for error in form.password1.errors %}
+                <div class="field-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="password2">
+            <label for="password2">Confirm Password</label>
+            <input type="password" name="password2" required>
+            {% for error in form.password2.errors %}
+                <div class="field-error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        
+        <button type="submit">Sign Up</button>
+
+    </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/accounts/signup.js' %}"></script>
+{% endblock %}
