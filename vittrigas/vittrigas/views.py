@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, ListView
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model
@@ -27,8 +27,6 @@ class Profile(DetailView):
 
     slug_field = 'username'
     slug_url_kwarg = 'username'
-
-
 
 # class Success(TemplateView):
 #     template_name = 'accounts/logged.html'

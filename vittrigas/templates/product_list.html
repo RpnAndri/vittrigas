@@ -5,9 +5,26 @@
 <link rel="stylesheet" href="{% static 'css/product_list.css' %}">
 {% endblock %}
 
+
+
 {% block content %}
 
+{% for p in products %}
+<h1> 
+    {{ p.name }}
+</h1>
+{% if p.img %}
+    <img src="{{ p.img.url }}" alt="{{ product.name }}" width="200">
+{% endif %}
+{% endfor %}
+
+<h1>Product</h1>
+<h3>Hello Eemil</h3>
+
 {% endblock %}
+
+
+
 
 {% block js %}
 <script src="{% static 'js/product_list.js' %}"></script>
