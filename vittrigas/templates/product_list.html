@@ -9,14 +9,31 @@
 
 {% block content %}
 
-{% for p in products %}
-<h1> 
-    {{ p.name }}
-</h1>
-{% if p.img %}
-    <img src="{{ p.img.url }}" alt="{{ product.name }}" width="200">
-{% endif %}
-{% endfor %}
+<div class="all-products">
+    {% for p in products %}
+        <div class="product-container">
+            <img src="{{ p.img.url }}" alt="{{ product.name }}" width="200">
+            <div class="product-details">
+                <div class="product-name">
+                    <p class="product-name">{{ p.name }}</p>
+                </div>
+                <div class="product-rating">
+                    <p class="product-rating">{{ p.rating }}</p>
+                </div>
+                <div class="product-price">
+                    <p class="product-price">{{ p.price }}</p>
+                </div>
+                <div class="add-to-cart">
+                    <button class="add-to-cart">Add To Cart</button>
+                </div>
+                
+
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
 
 <h1>Product</h1>
 <h3>Hello Eemil</h3>
