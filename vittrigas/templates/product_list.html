@@ -14,8 +14,12 @@
     {{ p.name }}
 </h1>
 {% if p.img %}
-    <img src="{{ p.img.url }}" alt="{{ product.name }}" width="200">
+    <img src="{{ p.img.url }}" alt="{{ p.name }}" width="200">
 {% endif %}
+<form action="{% url 'store:add_to_cart' p.id %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Add to Card</button>
+</form>
 {% endfor %}
 
 <h1>Product</h1>
