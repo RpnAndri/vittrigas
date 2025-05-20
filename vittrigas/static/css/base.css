@@ -123,6 +123,19 @@ ul {
     transform: rotate(45deg);
 }
 
+.line2 {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.line2.bend {
+    opacity: 0;
+}
+
+.line3 {
+    transform-origin: 0% 100%;
+}
+
 .line3.bend {
     transform: rotate(-45deg);
 }
