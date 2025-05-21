@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>Vittrigas</title>
+    <title>Vittrigas - Online Store</title>
 
     <!--Tab Logo Header Image-->
     <!-- <link rel="icon" href="{% static '/blueginza/img/beluga_logo.png' %}"> -->
 
     <!-- Links to the css files -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="{% static 'js/base.js' %}"></script>
     {% block css %}
     {% endblock %}
 
@@ -62,62 +64,110 @@
     </header>
 
     <!-- This would contain the main contents of the page -->
-    <section class="content">
+<section class="content">
+    <!-- Intro -->
+    <div class="content-intro">
+        <h1 class="content-intro-head">Welcome to Vittrigas!</h1>
+        <p class="content-intro-text">Located in Seoul, we are a new artisan workshop prepared to offer the highest quality furniture. 
+            We combine tradition and innovation, in an attempt to offer a distinguished finish. Make your house a home with Vittrigas. </p>
+        <a href="/vittrigas/templates/product_list.html" class="shop-now">Shop Now</a>
+    </div>
+
+      <!-- Image slider container -->
+    <div class="slider-container">
+        <section class="slider" >
+            <div class="slider-images">
+            <img src="/media/products/lebron.png" alt="Article 1" class="slide active">
+            <img src="/media/products/lebron.png" alt="Article 2" class="slide">
+            <img src="/media/products/tree.png" alt="Article 3" class="slide">
+            <!-- Add more images as needed -->
+            </div>
+            <!-- Navigation buttons -->
+            <button class="slider-btn prev" aria-label="Previous Slide">&#10094;</button>
+            <button class="slider-btn next" aria-label="Next Slide">&#10095;</button>
+            <!-- Slider Dots -->
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>         
+    </div>
+
+    <!-- OUR VISION -->
+    <div class="content-vision">
+        <h1 class="content-vision-head">Our vision</h1>
+        <p class="content-vision-text">As humans, we owe everything to nature. That's why we need to protect it at all costs. In Vittrigas, we believe in the power of 
+            joint action. Every little gesture counts. There's no Planet B. </p>
+        <a href="/vittrigas/templates/vision.html" class="vision-button">Learn More!</a>
+    </div>
+
+      <!-- Image container -->
+    <div class="vision-image">
+        <img src="/media/products/tree.png" alt="The Team" class="vision-image-img">
+        <p class="vision-image-text">Acacia tree. Amazon forest</p>   
+    </div>
+
+    <!-- User  -->
+    <div class="content-user">
+        <h1 class="content-user-head">Enjoy personalized experience.</h1>
+        <p class="content-user-text"> In our online store, you can find a wide variety of products. We offer a personalized experience, 
+            where you can choose the product that best suits your needs. With your personal account, shop in an instant, get personalized recommendations and the latest updates on our newsletter. 
+            Shopping has never been easier! What are you waiting for? </p>
+        </p>
+        
+        <a href="/vittrigas/templates/vision.html" class="user-button">Sign up Today!</a>
+    </div>
+
+      <!-- User Image container -->
+    <div class="user-image">
+        <img src="/media/products/tree.png" alt="Enjoy user experience" class="user-image-img">  
+    </div>
+
+
         {% block content %}
         {% endblock %}
-    </section>
+</section>
 
     <footer class="footer">
-        <!-- This is the map pinned to seoultech -->
-        <div class="map"><iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=SeoulTech+(Vittrigas)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/collections/personal-trackers/">Personal GPS</a></iframe></div>
-        
-        <div class="wrapper">
-            <div class="contact">
-                <div class="company info">
-                    <ul class="company-info-list">
-                        <li class="company-info list-item"><h3 class="company-info-list-head">Vittrigas</h3></li>
-                        <li class="company-info list-item fa-item">The house that fries chicken.</li>
-                        <li class="company-info list-item"><img src="{% static 'img/cards.png' %}" alt="Image of payment options" class="payment-cards"></li>
-                    </ul>
-                </div>
-                <div class="shopping info">
-                    <ul class="shopping-info-list">
-                        <li class="shopping-info list-item"><h3 class="shopping-info-list-head">SHOPPING</h3></li>
-                        <li class="shopping-info list-item"><a href="" class="fa-item">Furniture Store</a></li>
-                        <li class="shopping-info list-item"><a href="" class="fa-item">Trending Appliances</a></li>
-                        <li class="shopping-info list-item"><a href="" class="fa-item">Accessories</a></li>
-                        <li class="shopping-info list-item"><a href="" class="fa-item">Sale</a></li>
-                    </ul>
-                </div>
-                <div class="contact-info info">
-                    <ul class="contact-info-list">
-                        <li class="contact-info list-item"><h3 class="contact-info-list-head">Others</h3></li>
-                        <li class="contact-info list-item"><a href="" class="fa-item">Contact Us</a></li>
-                        <li class="contact-info list-item"><a href="" class="fa-item">Payment Method</a></li>
-                        <li class="contact-info list-item"><a href="" class="fa-item">Delivery</a></li>
-                        <li class="contact-info list-item"><a href="" class="fa-item">Return and Exchange</a></li>
-                    </ul>
-                </div>
-                <div class="newletter info">
-                    <ul class="newletter-list">
-                        <li class="newletter list-item"><h3 class="newletter-list-head">Newletter</h3></li>
-                        <li class="newletter list-item fa-item">Be the first to know about new arrivals, look books, sales & promos!</li>
-                        <li class="newletter list-item">
-                            <div class="mail">
-                                <input type="email" placeholder="Your Email" class="email-newletter">
-                                <div class="icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                                        <path d="M21 4H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-9 6-9-6V6l9 6 9-6v2z"/>
-                                    </svg>
-                                </div>
-                                
-                            </div>
-                        </li>
-                        <hr class="newletter-hr">
-                    </ul>
-                </div>
-            </div>
+    <div class="info">
+        <!-- This is the info columns -->
+        <div class="company-info">
+            <ul class="company-info-list-store">
+                <li class="list-item"><h3 class="company-info-list-head">Vittrigas Store</h3></li>
+                <li class="list-item fa-item">New Collection</li>
+                <li class="list-item">Best Sellers</li>
+            </ul>
+            <ul class="company-info-list-about">
+                <li class="list-item"><h3 class="company-info-list-head">About Us!</h3></li>
+                <li class="list-item fa-item">Our Vision</li>
+                <li class="list-item fa-item">Our Team </li>
+            </ul>
         </div>
+        <!-- This is the social media links -->
+            <ul class="social-media">
+                <li class="list-item"><h3 class="company-info-list-head">Follow Us!</h3></li>
+                <li class="list-item"><a href="https://www.facebook.com" class="social-icon"><i class="social-icon fab fa-facebook-f"></i></a></li>
+                <li class="list-item"><a href="https://www.instagram.com" class="social-icon"><i class="social-icon fab fa-instagram"></i></a></li>
+                <li class="list-item"><a href="https://www.twitter.com" class="social-icon"><i class="social-icon fab fa-twitter"></i></a></li>
+                <li class="list-item"><a href="https://www.pinterest.com" class="social-icon"><i class="social-icon fab fa-pinterest"></i></i></a></li>
+            </ul>
+        <!-- This is the contact information -->
+            <ul class="contact">
+                <li class="list-item"><h3 class="company-info-list-head">Contact Us!</h3></li>
+                <li class="list-item"><i class="fas fa-map-marker-alt"></i> SeoulTech, South Korea</li>
+                <li class="list-item"><i class="fas fa-phone"></i> +82 2-1234-5678</li>
+                <li class="list-item"><i class="fas fa-envelope"></i> <a style="color:white" href="mailto:info@vittrigas.com">info@vittrigas.com</a> </li>
+            </ul>
+    </div>
+        <!-- This is the map pinned to seoultech -->
+        <div class="map">
+            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=SeoulTech+(Vittrigas)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                <a href="https://www.gps.ie/collections/personal-trackers/">Personal GPS</a>
+            </iframe>
+        </div>
+        
+        
     </footer>
 </div>
 
