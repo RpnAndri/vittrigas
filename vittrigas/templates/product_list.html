@@ -9,17 +9,36 @@
 
 {% block content %}
 
-{% for p in products %}
-<h1> 
-    {{ p.name }}
-</h1>
-{% if p.img %}
-    <img src="{{ p.img.url }}" alt="{{ product.name }}" width="200">
-{% endif %}
-{% endfor %}
+<div class="all-products">
+    {% for p in products %}
+        <div class="product-container">
+            <img src="{{ p.img.url }}" alt="{{ product.name }}" class="product-img">
+            <div class="product-details">
+                <div class="product-name">
+                    <p class="product-name">{{ p.name }}</p>
+                </div>
+                <div class="product-rating">
+                    {% for i in "12345" %}
+                        {% if p.rating >= forloop.counter %}
+                            <svg class="star" viewBox="0 0 24 24" id="star_filled" data-name="star filled" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="Rectangle_4" data-name="Rectangle 4" width="24" height="24" fill="none"></rect> <path id="Star" d="M10,15,4.122,18.09l1.123-6.545L.489,6.91l6.572-.955L10,0l2.939,5.955,6.572.955-4.755,4.635,1.123,6.545Z" transform="translate(2 3)" stroke="#000000" stroke-miterlimit="10" stroke-width="1.5"></path> </g></svg>
+                        {% else %}
+                            <svg class="star" viewBox="0 0 24 24" id="star_filled" data-name="star filled" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect id="Rectangle_4" data-name="Rectangle 4" width="24" height="24" fill="none"></rect> <path id="Star" d="M10,15,4.122,18.09l1.123-6.545L.489,6.91l6.572-.955L10,0l2.939,5.955,6.572.955-4.755,4.635,1.123,6.545Z" transform="translate(2 3)" stroke="#000000" stroke-miterlimit="10" stroke-width="1.5"></path> </g></svg>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="product-price">
+                    <p class="product-price">€{{ p.price }}</p>
+                </div>
+                <div class="add-to-cart-container">
+                    <button class="add-to-cart">Add To Cart</button>
+                </div>
+                
 
-<h1>Product</h1>
-<h3>Hello Eemil</h3>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
 
 {% endblock %}
 
