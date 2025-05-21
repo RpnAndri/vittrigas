@@ -1,0 +1,57 @@
+body {
+    min-height: 100vh;
+    background: #f0f2f5;
+    font-family: Arial, sans-serif;
+
+}
+
+.login-container {
+    background: #fff;
+    background-image: url('/media/products/lebron.png');
+    background-size: cover;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    min-width: 320px;
+    max-width: 350px;
+    margin: 40px auto;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.login-container button[type="submit"] {
+    width: 100%;
+    padding: 0.7rem;
+    background: #9E3039;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-container button[type="submit"]:hover {
+    background: #FECC02;
+}
+
+.field-error {
+    color: #d32f2f;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
