@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 50px;
+    margin: 100px;
     height: 50vh;
 }
 
@@ -25,6 +25,8 @@
     color: #FAFAFA;
     border-bottom-right-radius: 30px;
     border-top-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
 }
 
 .summary-header {
@@ -32,6 +34,11 @@
     font-size: 23px;
     margin-bottom: 12px;
     height: 10%;
+}
+
+.order-summary {
+    margin-top: 0;
+    margin-bottom: 6px;
 }
 
 .items {
@@ -84,4 +91,101 @@
 .total {
     font-size: 18px;
     font-weight: 600;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+
+.card-details {
+    height: 70%;
+}
+
+.double {
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.expire, .cvc-number {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.expire {
+    margin-right: 10px;
+}
+.cvc-number {
+    margin-left: 10px;
+}
+
+.card-input {
+    line-height: 1.5em;
+    font-size: 1.3em;
+    width: 100%;
+    background-color: #EAEAEA;
+    border-radius: 10px;
+    border-color: #1A1A1A;
+    border: none;
+    padding-block: 0px !important;
+    padding-inline: 0px !important;
+}
+
+.checkout-btn {
+    text-align: center;
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #FAFAFA;
+}
+
+label {
+    font-size: 15px;
+}
+
+.method {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.desc {
+    width: 50%;
+    font-size: 15px;
+}
+
+.dropdown {
+    background: rgba(255, 255, 255, 0.1);
+    width: 50%;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.5em;
+    cursor: pointer;
+    position: relative;
+}
+.dropdown:after {
+    content: '\25BE';
+    right: 8px;
+    position: absolute;
+}
+
+.dropdown-select {
+    display: none;
+}
+
+.logo {
+    height: 20%;
+    text-align: center;
+}
+
+.payment-logo {
+    height: 100%;
 }

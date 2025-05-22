@@ -19,3 +19,5 @@ document.getElementsByClassName("total-vat")[0].textContent = vat_total;
 document.getElementsByClassName("total-price")[0].textContent = total_price;
 
 // console.log(total_price);
+
+

@@ -10,7 +10,8 @@
 <div class="checkout">
     <div class="summary">
         <div class="summary-header">
-            Order Summary
+            <p class="order-summary">Order Summary</p>
+            <hr>
         </div>
         <div class="items">
             {% for item in cart.items.all %}
@@ -46,7 +47,59 @@
         </div>
     </div>
     <div class="payment">
-        VISA
+        <div class="method">
+            <p class="desc">Please select your card: </p>
+            <div class="dropdown">VISA</div>
+            <div class="dropdown-select">
+                <ul>
+                    <li>Master Card</li>
+                    <li>American Express</li>
+                </ul>
+            </div>
+        </div>
+        <div class="logo">
+            <img class="payment-logo" src="{% static 'img/payment/visa.png' %}" alt="Image of Visa Card">
+        </div>
+        <div class="card-details">
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Non-field errors (e.g. passwords don't match) -->
+                {% if form.non_field_errors %}
+                <div class="field-error">
+                    {% for error in form.non_field_errors %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="card-row">
+                    <label for="card-number">Card Number </label>
+                    <input class="card-input" type="number" name="card-number" required>
+                </div>
+                
+                <div class="card-row">
+                    <label for="card-holder">Card Holder </label>
+                    <input class="card-input" type="text" name="card-holder" required>
+                </div>
+
+                <div class="card-row double">
+                    <div class="expire">
+                        <label for="expiry">Expires (MM/YY)</label>
+                        <input class="card-input" type="text" name="expiry" required>
+                    </div>
+                    <div class="cvc-number">
+                        <label for="cvc">CVC</label>
+                        <input class="card-input" type="number" name="cvc" required>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <button class="checkout-btn" type="submit">Checkout</button>    
+                </div>
+
+                
+            </form>
+        </div>
     </div>
 </div>
 
