@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="checkout">
+    <div class="summary">
+        <div class="summary-header">
+            Order Summary
+        </div>
+        <div class="items">
+            {% for item in cart.items.all %}
+                <div class="item">
+                    <div class="product-img">
+                        <img src="{{ item.product.img.url }}" alt="image of {{ item.product.name }}" class="item-img">
+                    </div>
+                    <div class="details">
+                        <p class="name">{{ item.product.name }}s</p>
+                        <p class="quantity">€{{ item.product.price }} x {{ item.quantity }} pieces</p>
+                    </div>
+                    
+                </div>
+                <div class="product-total">
+                    € <span class="total-product-price">{{ item.get_total_price }}</span>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+        <div class="computation">
+            <div class="vat">
+                <div class="vat-left">VAT <span class="vat-pct">12</span>%</div>
+                <div class="vat-right">€<span class="total-vat"></span></div>
+            </div>
+            <div class="delivery">
+                <div class="delivery-left">Delivery</div>
+                <div class="delivery-right">€<span class="total-delivery">9.99</span></div>
+            </div>
+            <div class="total">
+                <div class="total-left">TOTAL</div>
+                <div class="total-right">€<span class="total-price"></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="payment">
+        VISA
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/checkout.js' %}"></script>
+{% endblock %}
