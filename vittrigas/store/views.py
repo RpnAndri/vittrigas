@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -47,13 +47,22 @@ class Checkout(LoginRequiredMixin, FormMixin, DetailView):
         return self.request.user.customer.cart
 
     def get_success_url(self):
-        return reverse_lazy('payment_success') 
+        return reverse_lazy('store:payment_success') 
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
+        
         if form.is_valid():
             # Handle mock or real payment here
+            # These are all strings
+            card_number = form.cleaned_data['card_number']
+            card_holder = form.cleaned_data['card_holder']
+            expiry = form.cleaned_data['expiry']
+            cvc = form.cleaned_data['cvc']
+
+            
+
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -62,3 +71,6 @@ class Checkout(LoginRequiredMixin, FormMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
         return context
+
+class PaymentSuccess(LoginRequiredMixin, TemplateView):
+    template_name = 'payment_success.html'
