@@ -20,28 +20,47 @@ document.getElementsByClassName("total-price")[0].textContent = total_price;
 
 // console.log(total_price);
 
-dropdown = document.getElementsByClassName("dropdown")[0];
-current = document.getElementsByClassName("dropdown-current")[0];
-options = document.getElementsByClassName("dropdown-option");
+var cardDrop = document.getElementById('card-dropdown');
+var activeDropdown;
+cardDrop.addEventListener('click',function(){
+  var node;
+  for (var i = 0; i < this.childNodes.length-1; i++)
+    node = this.childNodes[i];
+    if (node.className === 'dropdown-select') {
+      node.classList.add('visible');
+       activeDropdown = node; 
+    };
+})
 
-current.addEventListener('click', function() {
-    dropdown.classList.toggle("open");
-});
-
-
-for (var i=0; i<options.length; i++) {
-    var option = options[i];
-    option.addEventListener('click', function () {
-        var current_text = current.textContent;
-        current.textContent = option.textContent;
-        option.textContent = current_text;
-        dropdown.classList.remove('open');
-    });
-};
-
-window.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove("open");
+var logo = document.getElementsByClassName("payment-logo")[0];
+window.onclick = function(e) {
+  if (e.target.tagName === 'LI' && activeDropdown){
+    if (e.target.innerHTML === 'Master Card') {
+        logo.src = '/static/img/payment/mastercard.png';
+        activeDropdown.classList.remove('visible');
+        activeDropdown = null;
+        e.target.innerHTML = document.getElementById('current-card').innerHTML;
+        document.getElementById('current-card').innerHTML = 'Master Card';
     }
-});
+    else if (e.target.innerHTML === 'American Express') {
+        logo.src = '/static/img/payment/amex.png';
+        activeDropdown.classList.remove('visible');
+        activeDropdown = null;
+        e.target.innerHTML = document.getElementById('current-card').innerHTML;
+        document.getElementById('current-card').innerHTML = 'American Express';      
+    }
+    else if (e.target.innerHTML === 'Visa') {
+        logo.src = '/static/img/payment/visa.png';
+        activeDropdown.classList.remove('visible');
+        activeDropdown = null;
+        e.target.innerHTML = document.getElementById('current-card').innerHTML;
+        document.getElementById('current-card').innerHTML = 'Visa';
+    }
+    }
+    else if (e.target.className !== 'dropdown-btn' && activeDropdown) {
+        activeDropdown.classList.remove('visible');
+        activeDropdown = null;
+    }
+}
+
 

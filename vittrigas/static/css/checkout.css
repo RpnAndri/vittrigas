@@ -162,38 +162,53 @@ label {
     font-size: 15px;
 }
 
+.dropdown-select.visible {
+    display:block;
+    width: 100%;
+}
 .dropdown {
-    background: rgba(255, 255, 255, 0.1);
+    position:relative;
     width: 50%;
+}
+
+.dropdown-select {
+    position: absolute;
+    background: #1A1A1A;
+    text-align: center;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    line-height: 2em;
+}
+
+.dropdown-btn {
+    background: rgba(255,255,255,0.1);
+    width: 100%;
     border-radius: 5px;
     text-align: center;
     line-height: 1.5em;
     cursor: pointer;
     position: relative;
-    user-select: none;
+    transition: background .2s ease;
 }
-.dropdown-current:after {
+.dropdown-btn:after {
     content: '\25BE';
     right: 8px;
     position: absolute;
 }
-
-.dropdown-content {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.dropdown-btn:hover {
+    background:rgba(255,255,255,0.2);
+    transition: background .2s ease;
+}
+.dropdown-select {
+    display: none;
 }
 
-.dropdown-option {
-  display: none;
+ul li:hover {
+    background:rgba(255,255,255,0.1);
 }
 
-.dropdown.open .dropdown-option {
-  display: block;
-}
-
-.dropdown-content li:hover {
-  /* background: #f0f0f0; */
+.credit-item {
+    cursor: pointer;
 }
 
 .logo {
@@ -203,12 +218,4 @@ label {
 
 .payment-logo {
     height: 100%;
-}
-
-.visible {
-    display: block;
-}
-
-.hidden {
-    display: none;
 }
