@@ -170,15 +170,30 @@ label {
     line-height: 1.5em;
     cursor: pointer;
     position: relative;
+    user-select: none;
 }
-.dropdown:after {
+.dropdown-current:after {
     content: '\25BE';
     right: 8px;
     position: absolute;
 }
 
-.dropdown-select {
-    display: none;
+.dropdown-content {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-option {
+  display: none;
+}
+
+.dropdown.open .dropdown-option {
+  display: block;
+}
+
+.dropdown-content li:hover {
+  /* background: #f0f0f0; */
 }
 
 .logo {
@@ -188,4 +203,12 @@ label {
 
 .payment-logo {
     height: 100%;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
 }

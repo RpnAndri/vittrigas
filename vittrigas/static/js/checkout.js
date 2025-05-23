@@ -20,4 +20,28 @@ document.getElementsByClassName("total-price")[0].textContent = total_price;
 
 // console.log(total_price);
 
+dropdown = document.getElementsByClassName("dropdown")[0];
+current = document.getElementsByClassName("dropdown-current")[0];
+options = document.getElementsByClassName("dropdown-option");
+
+current.addEventListener('click', function() {
+    dropdown.classList.toggle("open");
+});
+
+
+for (var i=0; i<options.length; i++) {
+    var option = options[i];
+    option.addEventListener('click', function () {
+        var current_text = current.textContent;
+        current.textContent = option.textContent;
+        option.textContent = current_text;
+        dropdown.classList.remove('open');
+    });
+};
+
+window.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+    }
+});
 

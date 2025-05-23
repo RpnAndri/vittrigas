@@ -49,13 +49,15 @@
     <div class="payment">
         <div class="method">
             <p class="desc">Please select your card: </p>
-            <div class="dropdown">VISA</div>
-            <div class="dropdown-select">
-                <ul>
-                    <li>Master Card</li>
-                    <li>American Express</li>
+            
+            <div class="dropdown">
+                <ul class="dropdown-content">
+                    <li class="dropdown-current">VISA</li>
+                    <li class="dropdown-option">Master Card</li>
+                    <li class="dropdown-option">American Express</li>
                 </ul>
             </div>
+            
         </div>
         <div class="logo">
             <img class="payment-logo" src="{% static 'img/payment/visa.png' %}" alt="Image of Visa Card">
