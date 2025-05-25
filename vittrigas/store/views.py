@@ -61,8 +61,8 @@ class Checkout(LoginRequiredMixin, FormMixin, DetailView):
             expiry = form.cleaned_data['expiry']
             cvc = form.cleaned_data['cvc']
 
-            
-
+            # Delete the contents of the cart indicating that you bought it
+            CartItem.objects.filter(cart=self.object).delete()
             return self.form_valid(form)
         else:
             return self.form_invalid(form)

@@ -7,64 +7,60 @@
 
 {% block content %}
 
-<!-- Everyone can view the one below -->
-<h1>{{ profile.username }}</h1>
-<p>Email: {{ profile.email }}</p>
-<p>Address: {{ profile.customer.address }}</p>
+<div class="profile-container">
+    <!-- Left: Current Info -->
+    <div class="profile-summary">
+        <h2>Profile Info</h2>
+        <p><strong>Username:</strong> {{ profile.username }}</p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+        <p><strong>Address:</strong> {{ profile.customer.address }}</p>
+    </div>
 
-<!-- Code only available to the owner -->
-{% if user == profile %}
-    <h2>Edit Profile</h2>
+    <!-- Right: Edit Form (Only if owner) -->
+    {% if user == profile %}
+    <div class="profile-form">
+        <h2>Edit Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
 
-    <form method="POST">
-        {% csrf_token %}
-
-        {% if form.non_field_errors %}
-            <div class="form-error">
-                {% for error in form.non_field_errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        <div class="form-group">
             <label for="id_username">Username</label>
             <input type="text" name="username" id="id_username" value="{{ form.username.value|default:'' }}">
             {% for error in form.username.errors %}
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
-        </div>
 
-        <div class="form-group">
             <label for="id_email">Email</label>
             <input type="email" name="email" id="id_email" value="{{ form.email.value|default:'' }}">
             {% for error in form.email.errors %}
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
-        </div>
 
-        <div class="form-group">
             <label for="id_address">Address</label>
             <input type="text" name="address" id="id_address" value="{{ form.address.value|default:'' }}">
             {% for error in form.address.errors %}
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
-        </div>
 
-        <div class="form-group">
             <label for="id_password">Password</label>
             <input type="password" name="password" id="id_password">
-            <small>Leave blank if you don't want to change it.</small>
+            <small>Leave blank to keep current password.</small>
             {% for error in form.password.errors %}
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
-        </div>
 
-        <button type="submit">Save Changes</button>
-    </form>
-
-{% endif %}
-
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+    {% endif %}
+    
+</div>
 
 
 {% endblock %}
