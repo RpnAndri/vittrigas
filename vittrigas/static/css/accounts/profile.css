@@ -1,0 +1,26 @@
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+}
+
+.field-error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.form-error {
+    background-color: #ffe6e6;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid red;
+}

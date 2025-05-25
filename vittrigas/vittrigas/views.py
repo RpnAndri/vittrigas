@@ -20,13 +20,5 @@ class SignUp(CreateView):
     success_url = reverse_lazy('index')
     template_name = 'accounts/signup.html'
 
-class Profile(DetailView):
-    context_object_name = 'profile'
-    model = User
-    template_name = 'accounts/profile.html'
-
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-
 # class Success(TemplateView):
 #     template_name = 'accounts/logged.html'
