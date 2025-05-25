@@ -13,7 +13,9 @@
         <h2>Profile Info</h2>
         <p><strong>Username:</strong> {{ profile.username }}</p>
         <p><strong>Email:</strong> {{ profile.email }}</p>
-        <p><strong>Address:</strong> {{ profile.customer.address }}</p>
+        {% if user == profile %}
+            <p><strong>Address:</strong> {{ profile.customer.address }}</p>
+        {% endif %}
     </div>
 
     <!-- Right: Edit Form (Only if owner) -->
@@ -48,9 +50,8 @@
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
 
-            <label for="id_password">Password</label>
+            <label for="id_password">Password <small>(Leave blank to keep current password.)</small></label>
             <input type="password" name="password" id="id_password">
-            <small>Leave blank to keep current password.</small>
             {% for error in form.password.errors %}
                 <p class="field-error">{{ error }}</p>
             {% endfor %}

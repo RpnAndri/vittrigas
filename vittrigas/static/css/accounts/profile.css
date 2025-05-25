@@ -4,24 +4,26 @@
     align-items: flex-start;
     gap: 2rem;
     padding: 2rem;
-    flex-wrap: wrap;
+    height: 500px;
 }
 
 .profile-summary,
 .profile-form {
-    flex: 1 1 400px;
+    width: 50%;
     padding: 2rem;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 80%;
 }
 
 .profile-summary {
-    background-color: #fcecd9;
+    background-color: #EAEAEA;
+    color: #111111;
 }
 
 .profile-form {
-    background-color: #000;
-    color: white;
+    background-color: #1A1A1A;
+    color: #FAFAFA;
 }
 
 .profile-form label {
