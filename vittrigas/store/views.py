@@ -70,6 +70,11 @@ class Checkout(LoginRequiredMixin, FormMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.get_form()
+
+        address = get_object_or_404(Customer, user=self.request.user).address
+        if address == '':
+            context['address_error'] = True
+
         return context
 
 class PaymentSuccess(LoginRequiredMixin, TemplateView):

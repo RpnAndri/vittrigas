@@ -7,6 +7,17 @@
 
 {% block content %}
 
+<!-- Errors like empty address -->
+{% if address_error %}
+    <div class="empty-address">
+        <h1>
+            Address is empty.
+        <br>    
+        <small>Go to your profile to add an address.</small>
+        </h1>
+    </div>
+{% endif %}
+
 <div class="checkout">
     <div class="summary">
         <div class="summary-header">
@@ -66,15 +77,6 @@
         <div class="card-details">
             <form method="POST">
                 {% csrf_token %}
-
-                <!-- Non-field errors (e.g. passwords don't match) -->
-                {% if form.non_field_errors %}
-                <div class="field-error">
-                    {% for error in form.non_field_errors %}
-                        <div>{{ error }}</div>
-                    {% endfor %}
-                </div>
-                {% endif %}
 
                 <div class="card-row">
                     <label for="card-number">Card Number </label>

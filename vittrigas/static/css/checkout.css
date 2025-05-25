@@ -138,12 +138,19 @@
     text-align: center;
     width: 100%;
     padding: 8px;
+    margin-top: 20px;
     border-radius: 10px;
     font-size: 19px;
     font-weight: 600;
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
     color: #FAFAFA;
+    cursor: pointer;
+}
+
+.checkout-btn:hover {
+    background:rgba(255,255,255,0.2);
+    transition: background .2s ease;
 }
 
 label {
@@ -218,4 +225,8 @@ ul li:hover {
 
 .payment-logo {
     height: 100%;
+}
+
+.empty-address {
+    text-align: center;
 }
