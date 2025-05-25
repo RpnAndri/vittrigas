@@ -10,7 +10,7 @@
 <div class="profile-container">
     <!-- Left: Current Info -->
     <div class="profile-summary">
-        <h2>Profile Info</h2>
+        <h2 style="text-align: center;">Profile Info</h2>
         <p><strong>Username:</strong> {{ profile.username }}</p>
         <p><strong>Email:</strong> {{ profile.email }}</p>
         {% if user == profile %}
@@ -21,7 +21,7 @@
     <!-- Right: Edit Form (Only if owner) -->
     {% if user == profile %}
     <div class="profile-form">
-        <h2>Edit Profile</h2>
+        <h2 style="text-align: center;">Edit Profile</h2>
         <form method="POST">
             {% csrf_token %}
             {% if form.non_field_errors %}
@@ -56,7 +56,7 @@
                 <p class="field-error">{{ error }}</p>
             {% endfor %}
 
-            <button type="submit">Save Changes</button>
+            <button type="submit" class="save-btn">Save Changes</button>
         </form>
     </div>
     {% endif %}

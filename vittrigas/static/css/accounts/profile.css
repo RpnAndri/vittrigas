@@ -44,12 +44,17 @@
 .profile-form button {
     margin-top: 1.5rem;
     padding: 0.8rem 1.5rem;
-    background-color: white;
-    color: black;
     border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FAFAFA;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
+}
+
+.profile-form button:hover {
+    background:rgba(255,255,255,0.2);
+    transition: background .2s ease;
 }
 
 .field-error {
@@ -64,3 +69,4 @@
     color: red;
     border-radius: 5px;
 }
+
