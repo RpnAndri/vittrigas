@@ -8,7 +8,8 @@ for (var i=0; i<products_prices.length; i++) {
 // Get the total vat computation
 vat_pct = Number(document.getElementsByClassName("vat-pct")[0].textContent)/100;
 vat_total = total_price * vat_pct;
-total_price += vat_total;
+vat_total = vat_total.toFixed(2);
+total_price += Number(vat_total);
 
 // Get the delivery computation
 delivery_total = Number(document.getElementsByClassName("total-delivery")[0].textContent);
