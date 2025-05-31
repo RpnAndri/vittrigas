@@ -3,11 +3,12 @@ from django.views.generic import ListView
 from .models import Product, Customer, Cart, CartItem
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.db.models import Sum
 
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ProductListView(LoginRequiredMixin, ListView):
+class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
     context_object_name = 'products'
@@ -16,8 +17,10 @@ class ProductListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         customer = get_object_or_404(Customer, user=self.request.user)
         cart, created = Cart.objects.get_or_create(customer=customer)
-        context['item_count'] = cart.items.count()  
+        context['cart'] = cart
+        context['item_count'] = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
         return context
+
 
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -44,3 +47,26 @@ def cart_detail(request):
     customer = get_object_or_404(Customer, user=request.user)
     cart, created = Cart.objects.get_or_create(customer=customer)
     return render(request, 'cart_detail.html', {'cart': cart})
+
+@login_required
+def increase_cart_item(request, item_id):
+    if request.method == "POST":
+        cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
+        cart_item.quantity += 1
+        cart_item.save()
+        return JsonResponse({'success': True, 'quantity': cart_item.quantity})
+    return JsonResponse({'success': False}, status=400)
+
+@login_required
+def decrease_cart_item(request, item_id):
+    if request.method == "POST":
+        cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+            return JsonResponse({'success': True, 'quantity': cart_item.quantity})
+        else:
+            # Optional: Item löschen, wenn Menge 0 erreichen soll
+            cart_item.delete()
+            return JsonResponse({'success': True, 'quantity': 0})
+    return JsonResponse({'success': False}, status=400)

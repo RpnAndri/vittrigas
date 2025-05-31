@@ -34,6 +34,43 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
+    document.querySelectorAll('.qty-increase').forEach(button => {
+        button.addEventListener('click', function () {
+            const itemId = this.dataset.itemId;
+            updateCartItemQuantity(itemId, 'increase');
+        });
+    });
+
+    document.querySelectorAll('.qty-decrease').forEach(button => {
+        button.addEventListener('click', function () {
+            const itemId = this.dataset.itemId;
+            updateCartItemQuantity(itemId, 'decrease');
+        });
+    });
+
+    function updateCartItemQuantity(itemId, action) {
+        fetch(`/store/cart/item/${itemId}/${action}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCSRFToken(),
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin',
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Update response:", data);
+            if (data.success) {
+                // Aktuell Beispiel: Seite neu laden (oder Update der DOM-Elemente per JS)
+                location.reload(); 
+            } else {
+                alert('Update fehlgeschlagen');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating cart item:', error);
+        });
+    }
 
     function getCSRFToken() {
         let cookieValue = null;

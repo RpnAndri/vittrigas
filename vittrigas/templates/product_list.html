@@ -9,10 +9,29 @@
 
 {% block content %}
 
-<div class="cart-icon">
+<div class="cart-container">
     <div class="cart-icon-container">
         <img src="{% static 'img/icons/shoppingcart.png' %}" alt="Cart" class="cart-image">
         <span class="cart-count">{{ item_count }}</span>
+    </div>
+    <div class="cart-dropdown">
+        {% if cart.items.exists %}
+            <ul>
+                {% for item in cart.items.all %}
+                    <li class="cart-item" data-item-id="{{ item.id }}">
+                        <img src="{{ item.product.img.url }}" alt="{{ item.product.name }}" class="cart-item-img">
+                        <span class="cart-item-name">{{ item.product.name }}</span>
+                        <div class="cart-item-qty-controls">
+                            <button class="qty-decrease" data-item-id="{{ item.id }}">−</button>
+                            <span class="qty-number">{{ item.quantity }}</span>
+                            <button class="qty-increase" data-item-id="{{ item.id }}">+</button>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Cart is empty</p>
+        {% endif %}
     </div>
 </div>
 
