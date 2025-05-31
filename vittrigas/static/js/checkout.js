@@ -1,3 +1,13 @@
+// Add a slash for the expiry
+expire_text = document.getElementById("expire-text");
+expire_text.addEventListener("input", () => {
+    let value = expire_text.value.replace(/\//g, "");
+    if (value.length >= 2) {
+        value = value.slice(0, 2) + "/" + value.slice(2, 4);
+    }  
+    expire_text.value = value;
+})
+
 // Get the total price of the products in the cart
 products_prices = document.getElementsByClassName("total-product-price");
 total_price = 0;

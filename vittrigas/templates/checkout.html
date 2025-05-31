@@ -96,8 +96,8 @@
 
                 <div class="card-row double">
                     <div class="expire">
-                        <label for="expiry">Expires (MM/YY)</label>
-                        <input class="card-input" type="text" name="expiry" required>
+                        <label for="expiry" style="text-wrap: nowrap;">Expires (MM/YY)</label>
+                        <input class="card-input" type="text" name="expiry" id="expire-text" required>
                         {% for error in form.expiry.errors %}
                             <div class="field-error">{{ error }}</div>
                         {% endfor %}
