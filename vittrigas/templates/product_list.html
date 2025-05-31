@@ -9,6 +9,13 @@
 
 {% block content %}
 
+<div class="cart-icon">
+    <div class="cart-icon-container">
+        <img src="{% static 'img/icons/shoppingcart.png' %}" alt="Cart" class="cart-image">
+        <span class="cart-count">{{ item_count }}</span>
+    </div>
+</div>
+
 <div class="all-products">
     {% for p in products %}
         <div class="product-container">
@@ -30,7 +37,7 @@
                     <p class="product-price">€{{ p.price }}</p>
                 </div>
                 <div class="add-to-cart-container">
-                    <button class="add-to-cart">Add To Cart</button>
+                    <button class="add-to-cart" data-product-id="{{ p.id }}">Add To Cart</button>
                 </div>
                 
 
