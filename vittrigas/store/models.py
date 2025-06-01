@@ -22,7 +22,7 @@ class Customer(models.Model):
         return self.user.username
 
 class Cart(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
 class CartItem(models.Model):

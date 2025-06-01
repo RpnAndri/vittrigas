@@ -37,54 +37,47 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.qty-increase').forEach(button => {
         button.addEventListener('click', function () {
             const itemId = this.dataset.itemId;
-            updateCartItemQuantity(itemId, 'increase');
+            updateQuantity(itemId, 'increase');
         });
     });
 
     document.querySelectorAll('.qty-decrease').forEach(button => {
         button.addEventListener('click', function () {
             const itemId = this.dataset.itemId;
-            updateCartItemQuantity(itemId, 'decrease');
+            updateQuantity(itemId, 'decrease');
         });
     });
 
-    function updateCartItemQuantity(itemId, action) {
-        fetch(`/store/cart/item/${itemId}/${action}/`, {
+    function updateQuantity(itemId, action) {
+        fetch(`/store/cart/update/${itemId}/${action}/`, {
             method: 'POST',
             headers: {
                 'X-CSRFToken': getCSRFToken(),
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            credentials: 'same-origin',
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Update response:", data);
-            if (data.success) {
-                // Aktuell Beispiel: Seite neu laden (oder Update der DOM-Elemente per JS)
-                location.reload(); 
-            } else {
-                alert('Update fehlgeschlagen');
+                'Content-Type': 'application/json'
             }
         })
-        .catch(error => {
-            console.error('Error updating cart item:', error);
-        });
+        .then(res => res.json())
+        .then(data => {
+            // Update Menge im DOM
+            const qtyElement = document.querySelector(`.cart-item[data-item-id="${itemId}"] .qty-number`);
+            if (qtyElement) {
+                qtyElement.textContent = data.quantity;
+            }
+
+            // Optional: Gesamtanzahl oben im Cart-Icon aktualisieren
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount && data.item_count !== undefined) {
+                cartCount.textContent = data.item_count;
+            }
+        })
+        .catch(error => console.error("Fehler beim Aktualisieren:", error));
     }
 
     function getCSRFToken() {
-        let cookieValue = null;
-        const name = 'csrftoken';
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
+        const cookieValue = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('csrftoken='))
+            ?.split('=')[1];
         return cookieValue;
     }
 });

@@ -4,6 +4,8 @@ from .models import Product, Customer, Cart, CartItem
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.db.models import Sum
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -70,3 +72,31 @@ def decrease_cart_item(request, item_id):
             cart_item.delete()
             return JsonResponse({'success': True, 'quantity': 0})
     return JsonResponse({'success': False}, status=400)
+
+@require_POST
+@login_required
+@login_required
+def update_cart_item_quantity(request, item_id, action):
+    cart = request.user.customer.cart
+    item = get_object_or_404(cart.items, id=item_id)
+
+    if action == 'increase':
+        item.quantity += 1
+    elif action == 'decrease':
+        item.quantity = max(1, item.quantity - 1)
+    item.save()
+
+    # Hole aktuelle Gesamtstückzahl
+    item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
+
+    return JsonResponse({
+        'success': True,
+        'quantity': item.quantity,
+        'item_count': item_count,  # <- wichtig!
+    })
+
+@login_required
+def get_cart_item_count(request):
+    cart = request.user.customer.cart
+    item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
+    return JsonResponse({'item_count': item_count})
