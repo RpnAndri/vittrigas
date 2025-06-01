@@ -49,7 +49,6 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    cursor: pointer;
     z-index: 1000;
 }
 
@@ -101,14 +100,21 @@
 .cart-dropdown {
     display: none;
     position: absolute;
-    top: 35px;
+    top: 40px; 
     right: 0;
     background: white;
     border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
     padding: 10px;
-    width: 200px;
-    font-size: 14px;
+    width: 250px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.cart-dropdown-wrapper {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 280px;
+    height: 260px;
 }
 
 .cart-container:hover .cart-dropdown {
@@ -119,7 +125,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 300px; /* wenn viele Artikel, Scrollbar */
+    max-height: 300px; 
     overflow-y: auto;
 }
 
