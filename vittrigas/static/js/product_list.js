@@ -58,13 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(res => res.json())
         .then(data => {
-            // Update Menge im DOM
+            // Update amount in DOM
             const qtyElement = document.querySelector(`.cart-item[data-item-id="${itemId}"] .qty-number`);
             if (qtyElement) {
                 qtyElement.textContent = data.quantity;
             }
 
-            // Optional: Gesamtanzahl oben im Cart-Icon aktualisieren
+            // Update total amount in cart count
             const cartCount = document.querySelector('.cart-count');
             if (cartCount && data.item_count !== undefined) {
                 cartCount.textContent = data.item_count;

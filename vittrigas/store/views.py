@@ -34,14 +34,13 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
     
-    # Gesamtanzahl aller Items im Warenkorb (Summe quantity)
-    from django.db.models import Sum
+    # Get current amount of item in cart
     item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({'item_count': item_count})
 
-    # Fallback: bei normalem Request weiterleiten
+    # Fallback for non-AJAX requests
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required
@@ -68,13 +67,11 @@ def decrease_cart_item(request, item_id):
             cart_item.save()
             return JsonResponse({'success': True, 'quantity': cart_item.quantity})
         else:
-            # Optional: Item löschen, wenn Menge 0 erreichen soll
             cart_item.delete()
             return JsonResponse({'success': True, 'quantity': 0})
     return JsonResponse({'success': False}, status=400)
 
 @require_POST
-@login_required
 @login_required
 def update_cart_item_quantity(request, item_id, action):
     cart = request.user.customer.cart
@@ -86,13 +83,13 @@ def update_cart_item_quantity(request, item_id, action):
         item.quantity = max(1, item.quantity - 1)
     item.save()
 
-    # Hole aktuelle Gesamtstückzahl
+    # Get current amout of item
     item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
 
     return JsonResponse({
         'success': True,
         'quantity': item.quantity,
-        'item_count': item_count,  # <- wichtig!
+        'item_count': item_count,  
     })
 
 @login_required
