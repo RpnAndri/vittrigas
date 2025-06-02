@@ -1,3 +1,4 @@
+
 hamburger = document.getElementById("hamburger");
 nav_pop = document.getElementsByClassName("nav-pop")[0];
 line_one = document.getElementsByClassName("line1")[0];
@@ -10,3 +11,4 @@ hamburger.addEventListener("click", () => {
     line_two.classList.toggle('bend');
     line_three.classList.toggle('bend');
 });
+
