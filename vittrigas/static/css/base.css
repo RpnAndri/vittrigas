@@ -6,8 +6,8 @@ html, body {
     margin: 0px;
     height: 100%;
 }
-
 .grid-container {
+    background-color: #ccc;
     display: grid;
     grid-template-areas: 
     "head"
@@ -20,20 +20,97 @@ html, body {
 
 .head {
     grid-area: head;
-}
-.content {
-    grid-area: content;
-    flex: 1;
-}
-.footer {
-    grid-area: footer;
-    background-color: black;
-    padding: 1em;
+    background-color: white;
 }
 
+/* Footer classes */
+.footer {
+    color: #aaa;
+    grid-area: footer;
+    display: grid;
+    grid-template-areas:
+    "info map";
+    grid-template-columns: 1fr 4fr;
+    background-color: black;
+    padding: 10px;
+}
+.footer .info {
+    grid-area: info;
+    display: grid;
+    grid-template-areas:
+    "company-info"
+    "contact"
+    "social-media";
+    grid-template-rows: max-content min-content max-content;
+    gap: 10px;
+}
+.info .social-media {
+    grid-area: social-media;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 15px;
+    margin: 10px;
+    width: max-content;
+}
+.info .contact{
+    grid-area: contact;
+    display: grid;
+    grid-template-columns: repeat(1,auto);
+    align-items: center;
+    column-gap: 15px;
+    margin: 10px;
+    width: max-content;
+}
+.footer .map {
+    grid-area: map;
+    align-content: right;
+}
+.info .company-info{
+    display: grid;
+    grid-template-areas:
+    "list-store list-about";
+    grid-template-columns: 1fr 1fr;
+    grid-area: company-info;
+    gap: 20px;
+    justify-items: center;
+
+}
+.company-info-list-store {
+    grid-area: list-store;
+    justify-content: left;
+    align-items: left;
+}
+.company-info-list-about {
+    grid-area: list-about;
+    justify-content: left;
+    align-items: left;
+}
+.social-icon {
+    color: white;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;  
+    padding-top: 15px;
+    margin-right: 0px;
+    margin-left: 0px;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+.social-icon:hover {
+    color: #cc00cc;
+    transform: scale(1.5);
+}
+/* End of footer classes */
 a {
-	text-decoration: none;
+    color: inherit;
+    text-decoration: none;
     
+}
+a:hover {
+    text-decoration: underline #cc00cc;
+    color:#cc00cc;
 }
 
 ul {
@@ -206,6 +283,7 @@ hr {
 
 .company-info-list-head, .shopping-info-list-head, .contact-info-list-head, .newletter-list-head {
     margin-bottom: 25px;
+    color: white;
 }
 
 .list-item {

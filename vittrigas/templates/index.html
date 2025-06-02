@@ -2,14 +2,71 @@
 {% load static %}
 
 {% block css %}
-<!-- <link rel="stylesheet" href="{% static 'css/index.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
 
 {% block content %}
+    <!-- Intro -->
+    <div class="content-intro">
+        <h1 class="content-intro-head">Welcome to Vittrigas!</h1>
+        <p class="content-intro-text">Located in Seoul, we are a new artisan workshop prepared to offer the highest quality furniture. 
+            We combine tradition and innovation, in an attempt to offer a distinguished finish. Make your house a home with Vittrigas. </p>
+        <a href="/vittrigas/templates/product_list.html" class="shop-now">Shop Now</a>
+    </div>
 
+      <!-- Image slider container -->
+    <div class="slider-container">
+        <section class="slider" >
+            <div class="slider-images">
+            <img src="/media/products/lebron.png" alt="Article 1" class="slide active">
+            <img src="/media/products/lebron.png" alt="Article 2" class="slide">
+            <img src="/media/products/tree.png" alt="Article 3" class="slide">
+            <!-- Add more images as needed -->
+            </div>
+            <!-- Navigation buttons -->
+            <button class="slider-btn prev" aria-label="Previous Slide">&#10094;</button>
+            <button class="slider-btn next" aria-label="Next Slide">&#10095;</button>
+            <!-- Slider Dots -->
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>         
+    </div>
+
+    <!-- OUR VISION -->
+    <div class="content-vision">
+        <h1 class="content-vision-head">Our vision</h1>
+        <p class="content-vision-text">As humans, we owe everything to nature. That's why we need to protect it at all costs. In Vittrigas, we believe in the power of 
+            joint action. Every little gesture counts. There's no Planet B. </p>
+        <a href="#" class="vision-button">Learn More!</a>
+    </div>
+
+      <!-- Image container -->
+    <div class="vision-image">
+        <img src="/media/products/tree.png" alt="The Team" class="vision-image-img">
+        <p class="vision-image-text">Acacia tree. Amazon forest</p>   
+    </div>
+
+    <!-- User  -->
+    <div class="content-user">
+        <h1 class="content-user-head">Enjoy personalized experience.</h1>
+        <p class="content-user-text"> In our online store, you can find a wide variety of products. We offer a personalized experience, 
+            where you can choose the product that best suits your needs. With your personal account, shop in an instant, get personalized recommendations and the latest updates on our newsletter. 
+            Shopping has never been easier! What are you waiting for? </p>
+        </p>
+        
+        <a href="#" class="user-button">Sign up Today!</a>
+    </div>
+
+      <!-- User Image container -->
+    <div class="user-image">
+        <img src="/media/products/tree.png" alt="Enjoy user experience" class="user-image-img">  
+    </div>
 
 {% endblock %}
 
 {% block js %}
-<!-- <script src="{% static 'js/index.js' %}"></script> -->
+<script src="{% static 'js/index.js' %}"></script>
 {% endblock %}

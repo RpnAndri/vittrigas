@@ -1,0 +1,232 @@
+.checkout {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 100px;
+    height: 50vh;
+}
+
+.summary {
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+    background-color: #EAEAEA;
+    color: 	#111111;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+
+}
+
+.payment {
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+    background-color: #1A1A1A;
+    color: #FAFAFA;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-header {
+    text-align: center;
+    font-size: 23px;
+    margin-bottom: 12px;
+    height: 10%;
+}
+
+.order-summary {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.items {
+    max-height: 70%;
+    height: 70%;
+    overflow-y: auto;
+}
+
+.item {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.item-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.details {
+    margin-left: 10px;
+    width: 100%;
+}
+
+.name, .quantity {
+    margin: 0;
+    font-weight: 400;
+}
+
+.quantity {
+    font-size: 14px;
+}
+
+.product-total {
+    display: flex;
+    justify-content: end;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.computation {
+    height: 20%;
+}
+
+.vat, .delivery, .total {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+
+.card-details {
+    height: 70%;
+}
+
+.double {
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.expire, .cvc-number {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.expire {
+    margin-right: 10px;
+}
+.cvc-number {
+    margin-left: 10px;
+}
+
+.card-input {
+    line-height: 1.5em;
+    font-size: 1.3em;
+    width: 100%;
+    background-color: #EAEAEA;
+    border-radius: 10px;
+    border-color: #1A1A1A;
+    border: none;
+    padding-block: 0px !important;
+    padding-inline: 0px !important;
+}
+
+.checkout-btn {
+    text-align: center;
+    width: 100%;
+    padding: 8px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #FAFAFA;
+    cursor: pointer;
+}
+
+.checkout-btn:hover {
+    background:rgba(255,255,255,0.2);
+    transition: background .2s ease;
+}
+
+label {
+    font-size: 15px;
+}
+
+.method {
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.desc {
+    width: 50%;
+    font-size: 15px;
+}
+
+.dropdown-select.visible {
+    display:block;
+    width: 100%;
+}
+.dropdown {
+    position:relative;
+    width: 50%;
+}
+
+.dropdown-select {
+    position: absolute;
+    background: #1A1A1A;
+    text-align: center;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    line-height: 2em;
+}
+
+.dropdown-btn {
+    background: rgba(255,255,255,0.1);
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.5em;
+    cursor: pointer;
+    position: relative;
+    transition: background .2s ease;
+}
+.dropdown-btn:after {
+    content: '\25BE';
+    right: 8px;
+    position: absolute;
+}
+.dropdown-btn:hover {
+    background:rgba(255,255,255,0.2);
+    transition: background .2s ease;
+}
+.dropdown-select {
+    display: none;
+}
+
+ul li:hover {
+    background:rgba(255,255,255,0.1);
+}
+
+.credit-item {
+    cursor: pointer;
+}
+
+.logo {
+    height: 20%;
+    text-align: center;
+}
+
+.payment-logo {
+    height: 100%;
+}
+
+.empty-address {
+    text-align: center;
+}
