@@ -37,6 +37,7 @@
 
             <div class="nav-right">
                 <a href="{% url 'login' %}" class="nav-item">Login</a>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="nav-item">click for suprise</a>
                 <a href=
                 {% if user.is_authenticated %}
                     "{% url 'store:profile' username=user.username %}"
