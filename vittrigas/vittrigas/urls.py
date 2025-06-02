@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-from . views import Index, Login, SignUp, Profile
+from . views import Index, Login, SignUp
 
 
 urlpatterns = [
@@ -29,7 +29,6 @@ urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('login/', Login.as_view(), name='login'),
     path('signup/', SignUp.as_view(), name='signup'),
-    path('profile/<str:username>/', Profile.as_view(), name='profile'),
     path('store/', include('store.urls'), name='store'),
     # path('success/', Success.as_view(), name='success'),
 ]

@@ -16,4 +16,4 @@ Make sure to download all the libraries and dependencies in the project.
 Then open http://127.0.0.1:8000/
 
 # Team Members
-Eemil, Marcel, and Andri
+Eemil, Marcel, Juan, and Andri
