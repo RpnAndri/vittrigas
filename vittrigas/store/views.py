@@ -32,10 +32,11 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        customer = get_object_or_404(Customer, user=self.request.user)
-        cart, _ = Cart.objects.get_or_create(customer=customer)
-        context['cart'] = cart
-        context['item_count'] = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
+        if self.request.user.is_authenticated:
+            customer = get_object_or_404(Customer, user=self.request.user)
+            cart, _ = Cart.objects.get_or_create(customer=customer)
+            context['cart'] = cart
+            context['item_count'] = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
         return context
 
 
