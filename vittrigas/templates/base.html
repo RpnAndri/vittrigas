@@ -58,12 +58,18 @@
             </div>
         </nav>
         <div class="nav-pop">
-            <a href="#" class="nav-item">Home</a>
-            <a href="#" class="nav-item">Shop</a>
-            <a href="#" class="nav-item">Accessories</a>
-            <a href="#" class="nav-item">Collections</a>
-            <a href="#" class="nav-item">Brands</a>
-            <a href="#" class="nav-item">Contact</a>
+            <a href="{% url 'index' %}" class="nav-item">Home</a>
+            <a href="{% url 'store:product' %}" class="nav-item">Store</a>
+            <a href="{% url 'login' %}" class="nav-item">Login</a>
+                <a href=
+                {% if user.is_authenticated %}
+                    "{% url 'store:profile' username=user.username %}"
+                {% else %}
+                    "{% url 'login' %}"
+                {% endif %}
+
+                 class="nav-item">Profile</a>
+
         </div>
         
     </header>
@@ -80,8 +86,7 @@
         <div class="company-info">
             <ul class="company-info-list-store">
                 <li class="list-item"><h3 class="company-info-list-head">Vittrigas Store</h3></li>
-                <li class="list-item fa-item"><a href="#">New Collection</a></li>
-                <li class="list-item"><a href="#">Best Sellers</a></li>
+                <li class="list-item fa-item"><a href="{% url 'store:product' %}"> Products</a></li>
             </ul>
             <ul class="company-info-list-about">
                 <li class="list-item"><h3 class="company-info-list-head">About Us!</h3></li>
