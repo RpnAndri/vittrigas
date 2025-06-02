@@ -23,24 +23,6 @@ html, body {
     background-color: white;
 }
 
-/* Content Classes */
-.content {
-    grid-area: content;
-    display: grid;
-    grid-template-areas:
-    "content-intro intro-image"
-    "vision-image content-vision"
-    "content-user user-image";
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: min-content min-content min-content;
-    gap: 20px;
-    padding: 20px;
-    row-gap: 120px;
-    margin: 15px;
-
-}
-/* End of Content Classes */
-
 /* Footer classes */
 .footer {
     color: #aaa;

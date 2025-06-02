@@ -7,13 +7,62 @@
 
 {% block content %}
 
-<!-- Code only available to the owner -->
-{% if user.is_authenticated and user == profile %}
-    <h1>YOU ARE THE OWNER</h1>
-{% endif %}
+<div class="profile-container">
+    <!-- Left: Current Info -->
+    <div class="profile-summary">
+        <h2 style="text-align: center;">Profile Info</h2>
+        <p><strong>Username:</strong> {{ profile.username }}</p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+        {% if user == profile %}
+            <p><strong>Address:</strong> {{ profile.customer.address }}</p>
+        {% endif %}
+    </div>
 
-<!-- Everyone can view the one below -->
-<h1>{{ profile.username }}</h1>
+    <!-- Right: Edit Form (Only if owner) -->
+    {% if user == profile %}
+    <div class="profile-form">
+        <h2 style="text-align: center;">Edit Profile</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <label for="id_username">Username</label>
+            <input type="text" name="username" id="id_username" value="{{ form.username.value|default:'' }}">
+            {% for error in form.username.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+
+            <label for="id_email">Email</label>
+            <input type="email" name="email" id="id_email" value="{{ form.email.value|default:'' }}">
+            {% for error in form.email.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+
+            <label for="id_address">Address</label>
+            <input type="text" name="address" id="id_address" value="{{ form.address.value|default:'' }}">
+            {% for error in form.address.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+
+            <label for="id_password">Password <small>(Leave blank to keep current password.)</small></label>
+            <input type="password" name="password" id="id_password">
+            {% for error in form.password.errors %}
+                <p class="field-error">{{ error }}</p>
+            {% endfor %}
+
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </div>
+    {% endif %}
+    
+</div>
+
 
 {% endblock %}
 
