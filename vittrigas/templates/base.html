@@ -37,7 +37,14 @@
 
             <div class="nav-right">
                 <a href="{% url 'login' %}" class="nav-item">Login</a>
-                <a href="{% url 'store:profile' %}" class="nav-item">Profile</a>
+                <a href=
+                {% if user.is_authenticated %}
+                    "{% url 'store:profile' username=user.username %}"
+                {% else %}
+                    "{% url 'login' %}"
+                {% endif %}
+
+                 class="nav-item">Profile</a>
             </div>
         </nav>
         <nav class="collapsed-navbar">
