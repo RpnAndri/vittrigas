@@ -5,8 +5,6 @@
 <link rel="stylesheet" href="{% static 'css/product_list.css' %}">
 {% endblock %}
 
-
-
 {% block content %}
 
 <div class="cart-container">
@@ -15,25 +13,7 @@
         <span class="cart-count">{{ item_count }}</span>
     </div>
     <div class="cart-dropdown-wrapper">
-        <div class="cart-dropdown">
-            {% if cart.items.exists %}
-            <ul>
-                {% for item in cart.items.all %}
-                <li class="cart-item" data-item-id="{{ item.id }}">
-                    <img src="{{ item.product.img.url }}" alt="{{ item.product.name }}" class="cart-item-img">
-                    <span class="cart-item-name">{{ item.product.name }}</span>
-                    <div class="cart-item-qty-controls">
-                        <button class="qty-decrease" data-item-id="{{ item.id }}" type="button">−</button>
-                        <span class="qty-number">{{ item.quantity }}</span>
-                        <button class="qty-increase" data-item-id="{{ item.id }}" type="button">+</button>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>Cart is empty</p>
-            {% endif %}
-        </div>
+        {% include 'partials/cart_dropdown.html' %}
     </div>
 </div>
 

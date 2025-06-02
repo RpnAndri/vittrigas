@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.db.models import Sum
 from django.views.decorators.http import require_POST
+from django.template.loader import render_to_string
 
 from .models import Product, Customer, Cart, CartItem
 
@@ -36,17 +37,10 @@ def add_to_cart(request, product_id):
     item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
 
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        return JsonResponse({'item_count': item_count})
+        cart_html = render_to_string('partials/cart_dropdown.html', {'cart': cart}, request=request)
+        return JsonResponse({'item_count': item_count, 'cart_html': cart_html})
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
-
-
-@login_required
-def cart_detail(request):
-    customer = get_object_or_404(Customer, user=request.user)
-    cart, _ = Cart.objects.get_or_create(customer=customer)
-    return render(request, 'cart_detail.html', {'cart': cart})
-
 
 @require_POST
 @login_required

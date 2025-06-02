@@ -9,15 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': getCSRFToken(),
-                    'X-Requested-With': 'XMLHttpRequest' // Wichtig, damit Django AJAX erkennt
+                    'X-Requested-With': 'XMLHttpRequest' 
                 },
-                credentials: 'same-origin' // Damit Cookies (inkl. Session) mitgesendet werden
+                credentials: 'same-origin' 
             })
                 .then(response => response.json())
                 .then(data => {
                     console.log("Product added via AJAX.");
 
-                    // Update der Cart-Zahl
                     const cartCountSpan = document.querySelector('.cart-count');
                     if (cartCountSpan) {
                         cartCountSpan.textContent = data.item_count;
@@ -28,65 +27,69 @@ document.addEventListener("DOMContentLoaded", function () {
                             cartCountSpan.style.display = 'none';
                         }
                     }
+                    const cartDropdownWrapper = document.querySelector('.cart-dropdown-wrapper');
+                    console.log("Cart dropdown wrapper:");
+                    if (cartDropdownWrapper) {
+                        cartDropdownWrapper.innerHTML = data.cart_html;
+                    }
                 })
+
                 .catch(error => {
                     console.error("Error:", error);
                 });
         });
     });
-    document.querySelectorAll('.qty-increase').forEach(button => {
-        button.addEventListener('click', function () {
-            const itemId = this.dataset.itemId;
+    document.addEventListener('click', function (e) {
+        if (e.target.matches('.qty-increase')) {
+            const itemId = e.target.dataset.itemId;
             updateQuantity(itemId, 'increase');
-        });
+        }
     });
 
-    document.querySelectorAll('.qty-decrease').forEach(button => {
-        button.addEventListener('click', function () {
-            const itemId = this.dataset.itemId;
+    document.addEventListener('click', function (e) {
+        if (e.target.matches('.qty-decrease')) {
+            const itemId = e.target.dataset.itemId;
             updateQuantity(itemId, 'decrease');
-        });
+        }
     });
 
     function updateQuantity(itemId, action) {
-    let url = '';
+        let url = '';
 
-    if (action === 'increase') {
-        url = `/store/cart/item/${itemId}/increase/`;  
-    } else if (action === 'decrease') {
-        url = `/store/cart/item/${itemId}/decrease/`;  
-    }
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCSRFToken(),
-            'Content-Type': 'application/json'
+        if (action === 'increase') {
+            url = `/store/cart/item/${itemId}/increase/`;
+        } else if (action === 'decrease') {
+            url = `/store/cart/item/${itemId}/decrease/`;
         }
-    })
-    .then(res => res.json())
-    .then(data => {
-        const qtyElement = document.querySelector(`.cart-item[data-item-id="${itemId}"] .qty-number`);
-        if (qtyElement) {
-            if (data.quantity > 0) {
-                qtyElement.textContent = data.quantity;
-            } else {
-                // Item aus dem DOM entfernen, da gelöscht
-                const cartItem = document.querySelector(`.cart-item[data-item-id="${itemId}"]`);
-                if (cartItem) {
-                    cartItem.remove();
-                }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCSRFToken(),
+                'Content-Type': 'application/json'
             }
-        }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const qtyElement = document.querySelector(`.cart-item[data-item-id="${itemId}"] .qty-number`);
+                if (qtyElement) {
+                    if (data.quantity > 0) {
+                        qtyElement.textContent = data.quantity;
+                    } else {
+                        const cartItem = document.querySelector(`.cart-item[data-item-id="${itemId}"]`);
+                        if (cartItem) {
+                            cartItem.remove();
+                        }
+                    }
+                }
 
-        // Cart-Zähler aktualisieren (optional, wenn du es hast)
-        const cartCount = document.querySelector('.cart-count');
-        if (cartCount && data.item_count !== undefined) {
-            cartCount.textContent = data.item_count;
-        }
-    })
-    .catch(error => console.error("Fehler beim Aktualisieren:", error));
-}
+                const cartCount = document.querySelector('.cart-count');
+                if (cartCount && data.item_count !== undefined) {
+                    cartCount.textContent = data.item_count;
+                }
+            })
+            .catch(error => console.error("Fehler beim Aktualisieren:", error));
+    }
 
 
     function getCSRFToken() {
