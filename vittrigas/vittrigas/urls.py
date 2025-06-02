@@ -21,7 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-from . views import Index, Login, SignUp
+from . views import Index, Login, SignUp, About
 
 
 urlpatterns = [
@@ -31,7 +31,7 @@ urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
     path('store/', include('store.urls'), name='store'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    
+    path('about/', About.as_view(), name='about'),
     # path('success/', Success.as_view(), name='success'),
 ]
 
