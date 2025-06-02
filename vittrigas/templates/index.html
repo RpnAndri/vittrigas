@@ -11,16 +11,25 @@
         <h1 class="content-intro-head">Welcome to Vittrigas!</h1>
         <p class="content-intro-text">Located in Seoul, we are a new artisan workshop prepared to offer the highest quality furniture. 
             We combine tradition and innovation, in an attempt to offer a distinguished finish. Make your house a home with Vittrigas. </p>
-        <a href="/vittrigas/templates/product_list.html" class="shop-now">Shop Now</a>
+        <a href="{% url 'store:product' %}" class="shop-now">Shop Now</a>
     </div>
 
       <!-- Image slider container -->
     <div class="slider-container">
         <section class="slider" >
             <div class="slider-images">
-            <img src="/media/products/lebron.png" alt="Article 1" class="slide active">
-            <img src="/media/products/lebron.png" alt="Article 2" class="slide">
-            <img src="/media/products/tree.png" alt="Article 3" class="slide">
+                <div class="slide active">
+                    <img src="/media/products/bed.jpg" alt="Article 1">
+                    <p  class="slider-text">Bed</p>
+                </div>
+                <div class="slide">
+                    <img src="/media/products/dresser.jpg" alt="Article 2" >
+                    <p class="slider-text">Dresser</p>
+                </div>
+                <div class="slide">
+                    <img src="/media/products/hat.jpg" alt="Article 3">
+                    <p class="slider-text">Hat</p>
+                </div>                
             <!-- Add more images as needed -->
             </div>
             <!-- Navigation buttons -->
@@ -41,12 +50,13 @@
         <p class="content-vision-text">As humans, we owe everything to nature. That's why we need to protect it at all costs. In Vittrigas, we believe in the power of 
             joint action. Every little gesture counts. There's no Planet B. </p>
         <a href="#" class="vision-button">Learn More!</a>
+        
     </div>
 
       <!-- Image container -->
     <div class="vision-image">
-        <img src="/media/products/tree.png" alt="The Team" class="vision-image-img">
-        <p class="vision-image-text">Acacia tree. Amazon forest</p>   
+        <img src="/media/products/tree.png" alt="Our Vision" >
+        <p>Acacia tree. Amazon forest</p>   
     </div>
 
     <!-- User  -->
@@ -57,12 +67,13 @@
             Shopping has never been easier! What are you waiting for? </p>
         </p>
         
-        <a href="#" class="user-button">Sign up Today!</a>
+        <a href="{% url 'signup'%}" class="user-button">Sign up Today!</a>
     </div>
 
       <!-- User Image container -->
     <div class="user-image">
-        <img src="/media/products/tree.png" alt="Enjoy user experience" class="user-image-img">  
+        <img src="/media/user-login.jpg" alt="Enjoy user experience">
+        <p>Sign up for a unique experience</p>  
     </div>
 
 {% endblock %}
