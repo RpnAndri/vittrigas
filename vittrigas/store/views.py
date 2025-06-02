@@ -49,47 +49,41 @@ def cart_detail(request):
     cart, created = Cart.objects.get_or_create(customer=customer)
     return render(request, 'cart_detail.html', {'cart': cart})
 
+@require_POST
 @login_required
 def increase_cart_item(request, item_id):
-    if request.method == "POST":
-        cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
-        cart_item.quantity += 1
-        cart_item.save()
-        return JsonResponse({'success': True, 'quantity': cart_item.quantity})
-    return JsonResponse({'success': False}, status=400)
+    cart = request.user.customer.cart
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
+    cart_item.quantity += 1
+    cart_item.save()
+    item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
+    return JsonResponse({
+        'success': True,
+        'quantity': cart_item.quantity,
+        'item_count': item_count,
+    })
 
-@login_required
-def decrease_cart_item(request, item_id):
-    if request.method == "POST":
-        cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
-        if cart_item.quantity > 1:
-            cart_item.quantity -= 1
-            cart_item.save()
-            return JsonResponse({'success': True, 'quantity': cart_item.quantity})
-        else:
-            cart_item.delete()
-            return JsonResponse({'success': True, 'quantity': 0})
-    return JsonResponse({'success': False}, status=400)
 
 @require_POST
 @login_required
-def update_cart_item_quantity(request, item_id, action):
+def decrease_cart_item(request, item_id):
     cart = request.user.customer.cart
-    item = get_object_or_404(cart.items, id=item_id)
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
 
-    if action == 'increase':
-        item.quantity += 1
-    elif action == 'decrease':
-        item.quantity = max(1, item.quantity - 1)
-    item.save()
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+        quantity = cart_item.quantity
+    else:
+        cart_item.delete()
+        quantity = 0
 
-    # Get current amout of item
     item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
 
     return JsonResponse({
         'success': True,
-        'quantity': item.quantity,
-        'item_count': item_count,  
+        'quantity': quantity,
+        'item_count': item_count,
     })
 
 @login_required

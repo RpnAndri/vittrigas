@@ -13,25 +13,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 credentials: 'same-origin' // Damit Cookies (inkl. Session) mitgesendet werden
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Product added via AJAX.");
-                
-                // Update der Cart-Zahl
-                const cartCountSpan = document.querySelector('.cart-count');
-                if (cartCountSpan) {
-                    cartCountSpan.textContent = data.item_count;
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Product added via AJAX.");
 
-                    if (data.item_count > 0) {
-                        cartCountSpan.style.display = 'inline-block';
-                    } else {
-                        cartCountSpan.style.display = 'none';
+                    // Update der Cart-Zahl
+                    const cartCountSpan = document.querySelector('.cart-count');
+                    if (cartCountSpan) {
+                        cartCountSpan.textContent = data.item_count;
+
+                        if (data.item_count > 0) {
+                            cartCountSpan.style.display = 'inline-block';
+                        } else {
+                            cartCountSpan.style.display = 'none';
+                        }
                     }
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
         });
     });
     document.querySelectorAll('.qty-increase').forEach(button => {
@@ -49,29 +49,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function updateQuantity(itemId, action) {
-        fetch(`/store/cart/update/${itemId}/${action}/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCSRFToken(),
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            // Update amount in DOM
-            const qtyElement = document.querySelector(`.cart-item[data-item-id="${itemId}"] .qty-number`);
-            if (qtyElement) {
-                qtyElement.textContent = data.quantity;
-            }
+    let url = '';
 
-            // Update total amount in cart count
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount && data.item_count !== undefined) {
-                cartCount.textContent = data.item_count;
-            }
-        })
-        .catch(error => console.error("Fehler beim Aktualisieren:", error));
+    if (action === 'increase') {
+        url = `/store/cart/item/${itemId}/increase/`;  
+    } else if (action === 'decrease') {
+        url = `/store/cart/item/${itemId}/decrease/`;  
     }
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCSRFToken(),
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const qtyElement = document.querySelector(`.cart-item[data-item-id="${itemId}"] .qty-number`);
+        if (qtyElement) {
+            if (data.quantity > 0) {
+                qtyElement.textContent = data.quantity;
+            } else {
+                // Item aus dem DOM entfernen, da gelöscht
+                const cartItem = document.querySelector(`.cart-item[data-item-id="${itemId}"]`);
+                if (cartItem) {
+                    cartItem.remove();
+                }
+            }
+        }
+
+        // Cart-Zähler aktualisieren (optional, wenn du es hast)
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount && data.item_count !== undefined) {
+            cartCount.textContent = data.item_count;
+        }
+    })
+    .catch(error => console.error("Fehler beim Aktualisieren:", error));
+}
+
 
     function getCSRFToken() {
         const cookieValue = document.cookie
