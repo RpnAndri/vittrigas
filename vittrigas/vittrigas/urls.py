@@ -31,6 +31,7 @@ urlpatterns = [
     path('signup/', SignUp.as_view(), name='signup'),
     path('profile/<str:username>/', Profile.as_view(), name='profile'),
     path('store/', include('store.urls'), name='store'),
+    
     # path('success/', Success.as_view(), name='success'),
 ]
 

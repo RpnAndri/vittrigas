@@ -8,7 +8,6 @@ from . forms import UserCreateForm
 User = get_user_model()
 
 
-
 class Index(TemplateView):
     template_name = 'index.html'
 

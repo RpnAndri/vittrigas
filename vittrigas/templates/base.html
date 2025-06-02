@@ -26,18 +26,16 @@
     <header class="head">
         <nav class="navbar">
             <div class="nav-left">
-                <a href="#" class="nav-item">Home</a>
-                <a href="#" class="nav-item">Shop</a>
-                <a href="#" class="nav-item">Accessories</a>
+                <a href="{% url 'index' %}" class="nav-item">Home</a>
+                <a href="{% url 'store:product' %}" class="nav-item">Store</a>
             </div>
             <div class="nav-center">
-                <a href="#" id="nav-logo" class="nav-item">Vittrigas</a>
+                <a href="{% url 'index' %}" id="nav-logo" class="nav-item">Vittrigas</a>
             </div>
 
             <div class="nav-right">
-                <a href="#" class="nav-item">Collections</a>
-                <a href="#" class="nav-item">Brands</a>
-                <a href="#" class="nav-item">Contact</a>
+                <a href="{% url 'login' %}" class="nav-item">Login</a>
+                <a href="{% url 'store:profile' %}" class="nav-item">Profile</a>
             </div>
         </nav>
         <nav class="collapsed-navbar">
