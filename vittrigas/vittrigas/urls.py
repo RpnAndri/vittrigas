@@ -30,6 +30,7 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('signup/', SignUp.as_view(), name='signup'),
     path('store/', include('store.urls'), name='store'),
+    
     # path('success/', Success.as_view(), name='success'),
 ]
 

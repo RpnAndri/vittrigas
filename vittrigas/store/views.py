@@ -17,6 +17,13 @@ class ProductListView(ListView):
     template_name = 'product_list.html'
     context_object_name = 'products' 
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q')
+        if query:
+            queryset = queryset.filter(name__icontains=query)
+        return queryset
+
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -35,7 +42,6 @@ def cart_detail(request):
     customer = get_object_or_404(Customer, user=request.user)
     cart, created = Cart.objects.get_or_create(customer=customer)
     return render(request, 'cart_detail.html', {'cart': cart})
-
 
 class Checkout(LoginRequiredMixin, FormMixin, DetailView):
     model = Cart
@@ -120,6 +126,3 @@ class Profile(FormMixin, DetailView):
         if self.request.user == self.get_object():
             context['form'] = self.get_form()
         return context
-    
-
-    
