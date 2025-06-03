@@ -96,6 +96,20 @@ def decrease_cart_item(request, item_id):
         'item_count': item_count,
     })
 
+@require_POST
+@login_required
+def remove_cart_item(request, item_id):
+    cart = request.user.customer.cart
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
+    cart_item.delete()
+
+    item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
+
+    return JsonResponse({
+        'success': True,
+        'quantity': 0,
+        'item_count': item_count,
+    })
 
 @login_required
 def get_cart_item_count(request):

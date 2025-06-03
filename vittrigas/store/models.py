@@ -10,7 +10,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     rating = models.PositiveIntegerField(default=0)
     quantity = models.PositiveIntegerField(default=0)
-    category = models.CharField(max_length=20)
+    category = models.CharField(max_length=20, default="")
     img = models.ImageField(upload_to='products/', default='products/tree.png')
 
     def __str__(self):
