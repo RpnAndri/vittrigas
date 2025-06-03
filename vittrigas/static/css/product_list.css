@@ -171,6 +171,30 @@
     background: #fff;
 }
 
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7); /* dark transparent background */
+    color: #fff;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.image-wrapper:hover .hover-description {
+    opacity: 1;
+}
+
+
 @media (max-width: 1000px) {
     .all-products {
         display: grid;
