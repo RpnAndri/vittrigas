@@ -10,7 +10,7 @@ from .forms import PaymentForm, ProfileForm
 from .models import Product, Customer, Cart, CartItem
 
 User = get_user_model()
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.db.models import Sum
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
@@ -59,6 +59,13 @@ def add_to_cart(request, product_id):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+@login_required
+def get_cart_dropdown(request):
+    customer = get_object_or_404(Customer, user=request.user)
+    cart, _ = Cart.objects.get_or_create(customer=customer)
+    cart_html = render_to_string('partials/cart_dropdown.html', {'cart': cart}, request=request)
+    return JsonResponse({'cart_html': cart_html})
+
 @require_POST
 @login_required
 def increase_cart_item(request, item_id):
@@ -72,7 +79,6 @@ def increase_cart_item(request, item_id):
         'quantity': cart_item.quantity,
         'item_count': item_count,
     })
-
 
 @require_POST
 @login_required

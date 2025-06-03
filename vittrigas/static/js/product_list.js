@@ -57,11 +57,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    function updateCartDropdown(cartHtml) {
-        const wrapper = document.querySelector('.cart-dropdown-wrapper');
-        if (wrapper) {
-            wrapper.innerHTML = cartHtml;
-        }
+    function updateCartDropdown() {
+        let url = `/store/cart/get/dropdown/`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCSRFToken(),
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const wrapper = document.querySelector('.cart-dropdown-wrapper');
+                if (wrapper) {
+                    wrapper.innerHTML = data.cart_html;
+                }
+            })
+            .catch(error => console.error("Update error:", error));
     }
 
     function updateQuantity(itemId, action) {
@@ -99,6 +112,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 const cartCount = document.querySelector('.cart-count');
                 if (cartCount && data.item_count !== undefined) {
                     cartCount.textContent = data.item_count;
+                }
+                if (data.item_count == 0) {
+                    updateCartDropdown();
                 }
             })
             .catch(error => console.error("Update error:", error));
