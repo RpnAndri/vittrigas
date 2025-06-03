@@ -22,7 +22,7 @@ body {
     margin-bottom: 0.5rem;
     font-weight: bold;
 }
-
+.signup-container input[type="email"],
 .signup-container input[type="text"],
 .signup-container input[type="password"] {
     width: 100%;

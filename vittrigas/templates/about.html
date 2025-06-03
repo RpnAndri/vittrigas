@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Intro -->
+    <section class="about-us">
+  <div class="about-intro">
+    <h2>About Us</h2>
+    <p>
+      Located in <strong>Seoul</strong>, we are a new artisan workshop prepared to offer the highest quality furniture. 
+      We combine tradition and innovation to deliver a distinguished finish that reflects our passion for craftsmanship. 
+      Make your house a home with <strong>Vittrigas</strong>.
+    </p>
+  </div>
+
+  <div class="about-sections">
+    <div class="about-block reverse">
+      <div class="text-content">
+        <h3>Craftsmanship & Detail</h3>
+        <p>Our skilled artisans focus on every detail, using time-honored techniques to ensure each piece is unique and timeless.
+           With years of experience, we take pride in our craftsmanship, ensuring that every piece of furniture is made with care and precision. 
+        </p>
+      </div>
+      <img src="/media/about/workshop.jpg" alt="Artisan Workshop">
+
+    </div>
+
+    <div class="about-block">
+      <div class="text-content">
+        <h3>Innovation Meets Tradition</h3>
+        <p>We blend modern design with traditional materials, crafting furniture that fits contemporary homes while honoring heritage.
+            While we are a new workshop, we have a long history of craftsmanship and dedication to quality. 
+        </p>
+        <p>From cozy chairs to elegant tables, Vittrigas helps transform living spaces into expressions of personal style and warmth.
+            The traditional design of our furniture is meant to last for generations, making it a perfect addition to your home.
+        </p>
+      </div>
+      <img src="/media/about/design.jpg" alt="Furniture Design">
+    </div>
+
+    <div class="about-block reverse">
+      <div class="text-content">
+        <h3>No Planet B</h3>
+        <p>
+          As humans, we owe everything to nature. That's why we need to protect it at all costs. 
+          In Vittrigas, we believe in the power of joint action. Every little gesture counts. 
+          There's no Planet B.
+        </p>
+        <p>
+          We are committed to sustainability, using eco-friendly materials and practices to minimize our environmental impact. 
+          Our furniture is designed not only to be beautiful but also to be kind to the planet.
+        </p>
+      </div>
+        <div class="image-crop">
+          <img src="/media/about/nature.jpg" alt="Furniture in Home">    
+        </div>
+      </div>
+
+  </div>
+</section>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

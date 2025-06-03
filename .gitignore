@@ -1,4 +1,5 @@
 vittrigas/vittrigas/__pycache__/
 vittrigas/store/__pycache__/
 vittrigas/store/migrations/__pycache__/
-vittrigas/db.sqlite3
+__pycache__/
+*.pyc
