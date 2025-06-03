@@ -612,12 +612,10 @@ hr {
         margin: 50px;
         box-sizing: border-box;
     }
-
     .nav-right-logo {
-        display: block;
-        position: absolute;
-        right: 15px;
-        z-index: 100;
+        display:flex;
+        align-items: center;
+        align-content: center;
     }
     .hamburger {
         display: flex;
