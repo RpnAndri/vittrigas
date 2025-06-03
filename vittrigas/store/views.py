@@ -26,19 +26,29 @@ class ProductListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         query = self.request.GET.get('q')
+        category_filter = self.request.GET.get('category')
+
         if query:
             queryset = queryset.filter(name__icontains=query)
+
+        if category_filter:
+            queryset = queryset.filter(category=category_filter)
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        categories = Product.objects.values_list('category', flat=True).distinct().order_by('category')
+        context['categories'] = categories
+
         if self.request.user.is_authenticated:
             customer = get_object_or_404(Customer, user=self.request.user)
             cart, _ = Cart.objects.get_or_create(customer=customer)
             context['cart'] = cart
             context['item_count'] = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
-        return context
 
+        return context
 
 @login_required
 def add_to_cart(request, product_id):
