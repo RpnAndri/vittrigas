@@ -10,7 +10,7 @@ from .forms import PaymentForm, ProfileForm
 from .models import Product, Customer, Cart, CartItem
 
 User = get_user_model()
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.db.models import Sum
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
@@ -26,19 +26,29 @@ class ProductListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         query = self.request.GET.get('q')
+        category_filter = self.request.GET.get('category')
+
         if query:
             queryset = queryset.filter(name__icontains=query)
+
+        if category_filter:
+            queryset = queryset.filter(category=category_filter)
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        categories = Product.objects.values_list('category', flat=True).distinct().order_by('category')
+        context['categories'] = categories
+
         if self.request.user.is_authenticated:
             customer = get_object_or_404(Customer, user=self.request.user)
             cart, _ = Cart.objects.get_or_create(customer=customer)
             context['cart'] = cart
             context['item_count'] = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
-        return context
 
+        return context
 
 @login_required
 def add_to_cart(request, product_id):
@@ -59,6 +69,13 @@ def add_to_cart(request, product_id):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+@login_required
+def get_cart_dropdown(request):
+    customer = get_object_or_404(Customer, user=request.user)
+    cart, _ = Cart.objects.get_or_create(customer=customer)
+    cart_html = render_to_string('partials/cart_dropdown.html', {'cart': cart}, request=request)
+    return JsonResponse({'cart_html': cart_html})
+
 @require_POST
 @login_required
 def increase_cart_item(request, item_id):
@@ -72,7 +89,6 @@ def increase_cart_item(request, item_id):
         'quantity': cart_item.quantity,
         'item_count': item_count,
     })
-
 
 @require_POST
 @login_required
@@ -96,6 +112,20 @@ def decrease_cart_item(request, item_id):
         'item_count': item_count,
     })
 
+@require_POST
+@login_required
+def remove_cart_item(request, item_id):
+    cart = request.user.customer.cart
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__customer__user=request.user)
+    cart_item.delete()
+
+    item_count = cart.items.aggregate(total=Sum('quantity'))['total'] or 0
+
+    return JsonResponse({
+        'success': True,
+        'quantity': 0,
+        'item_count': item_count,
+    })
 
 @login_required
 def get_cart_item_count(request):
