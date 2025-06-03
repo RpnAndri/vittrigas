@@ -24,6 +24,7 @@ total_price += Number(vat_total);
 // Get the delivery computation
 delivery_total = Number(document.getElementsByClassName("total-delivery")[0].textContent);
 total_price += delivery_total;
+total_price = total_price.toFixed(2);
 
 // Reflect to the DOM
 document.getElementsByClassName("total-vat")[0].textContent = vat_total;
