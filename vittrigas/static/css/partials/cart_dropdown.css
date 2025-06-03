@@ -39,21 +39,33 @@
 .cart-item-qty-controls {
     display: flex;
     align-items: center;
+    gap: 4px; 
+    margin-left: 10px;
 }
 
 .cart-item-qty-controls button {
     background: #eee;
     border: none;
-    padding: 4px 8px;
+    padding: 4px 6px;
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
     border-radius: 3px;
     user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cart-item-qty-controls button:hover {
     background: #ddd;
+}
+
+.trashcan-image {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    display: inline-block;
 }
 
 .qty-number {
@@ -66,4 +78,26 @@
 .cart-dropdown li {
     padding: 5px 0;
     border-bottom: 1px solid #eee;
+}
+
+.checkout-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #222;
+    color: white;
+    padding: 10px 0;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #fff;
+    color: #222;
+    border: 1.5px solid #222;
+    text-decoration: none;  
 }
