@@ -149,7 +149,7 @@ class Checkout(LoginRequiredMixin, FormMixin, DetailView):
         self.object = self.get_object()
         form = self.get_form()
         
-        if form.is_valid():
+        if form.is_valid() and self.request.user == self.object and self.object.customer != "":
             # Handle mock or real payment here
             # These are all strings
             card_number = form.cleaned_data['card_number']
