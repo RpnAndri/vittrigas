@@ -10,7 +10,7 @@
     <title>Vittrigas - Online Store</title>
 
     <!--Tab Logo Header Image-->
-    <!-- <link rel="icon" href="{% static '/blueginza/img/beluga_logo.png' %}"> -->
+    <link rel="icon" href="{% static 'img/logo-rigas.png' %}" type="image/png">
 
     <!-- Links to the css files -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -32,7 +32,9 @@
                 <a href="{% url 'store:product' %}" class="nav-item">Store</a>
             </div>
             <div class="nav-center">
+                <img src="{% static 'img/logo-rigas.png' %}" alt="Vittrigas Logo" class="nav-logo" >
                 <a href="{% url 'index' %}" id="nav-logo" class="nav-item">Vittrigas</a>
+                
             </div>
 
             <div class="nav-right">
@@ -63,16 +65,23 @@
                 <span class="line line3"></span>
             </div>
             <div class="nav-right-logo">
-                <a href="#" id="nav-logo-shrink" class="nav-item">Vittrigas</a>
+                <img src="{% static 'img/logo-rigas.png' %}" alt="Vittrigas Logo" class="nav-logo shrink" >
+                <a href="{% url 'index' %}" id="nav-logo-shrink" class="nav-item">Vittrigas</a>
             </div>
         </nav>
         <div class="nav-pop">
-            <a href="#" class="nav-item">Home</a>
-            <a href="#" class="nav-item">Shop</a>
-            <a href="#" class="nav-item">Accessories</a>
-            <a href="#" class="nav-item">Collections</a>
-            <a href="#" class="nav-item">Brands</a>
-            <a href="#" class="nav-item">Contact</a>
+            <a href="{% url 'index' %}" class="nav-item">Home</a>
+            <a href="{% url 'store:product' %}" class="nav-item">Store</a>
+            <a href="{% url 'login' %}" class="nav-item">Login</a>
+                <a href=
+                {% if user.is_authenticated %}
+                    "{% url 'store:profile' username=user.username %}"
+                {% else %}
+                    "{% url 'login' %}"
+                {% endif %}
+
+                 class="nav-item">Profile</a>
+
         </div>
         
     </header>
@@ -89,13 +98,13 @@
         <div class="company-info">
             <ul class="company-info-list-store">
                 <li class="list-item"><h3 class="company-info-list-head">Vittrigas Store</h3></li>
-                <li class="list-item fa-item"><a href="#">New Collection</a></li>
-                <li class="list-item"><a href="#">Best Sellers</a></li>
+                <li class="list-item fa-item"><a href="{% url 'store:product' %}"> Products</a></li>
+                <!-- Add as many as needed -->
             </ul>
             <ul class="company-info-list-about">
                 <li class="list-item"><h3 class="company-info-list-head">About Us!</h3></li>
-                <li class="list-item fa-item">Our Vision</li>
-                <li class="list-item fa-item">Our Team </li>
+                <li class="list-item fa-item"><a href="{% url 'about'%}">Our Vision</a></li>
+                <!--Add as many as needed -->
             </ul>
         </div>
         <!-- This is the social media links -->
@@ -103,7 +112,7 @@
                 <li class="list-item"><h3 class="company-info-list-head">Follow Us!</h3></li>
                 <li class="list-item"><a href="https://www.facebook.com" class="social-icon"><i class="social-icon fab fa-facebook-f"></i></a></li>
                 <li class="list-item"><a href="https://www.instagram.com" class="social-icon"><i class="social-icon fab fa-instagram"></i></a></li>
-                <li class="list-item"><a href="https://www.twitter.com" class="social-icon"><i class="social-icon fab fa-twitter"></i></a></li>
+                <li class="list-item"><a href="https://x.com/MIT_CSAIL/status/1363172815315214336?lang=en" class="social-icon"><i class="social-icon fab fa-twitter"></i></a></li>
                 <li class="list-item"><a href="https://www.pinterest.com" class="social-icon"><i class="social-icon fab fa-pinterest"></i></i></a></li>
             </ul>
         <!-- This is the contact information -->

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function (event) {
-            event.preventDefault(); // Verhindert evtl. Standardverhalten
+            event.preventDefault();
 
             const productId = this.dataset.productId;
 
@@ -9,14 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: 'POST',
                 headers: {
                     'X-CSRFToken': getCSRFToken(),
-                    'X-Requested-With': 'XMLHttpRequest' 
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
-                credentials: 'same-origin' 
+                credentials: 'same-origin'
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Product added via AJAX.");
-
                     const cartCountSpan = document.querySelector('.cart-count');
                     if (cartCountSpan) {
                         cartCountSpan.textContent = data.item_count;
@@ -28,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
                     const cartDropdownWrapper = document.querySelector('.cart-dropdown-wrapper');
-                    console.log("Cart dropdown wrapper:");
                     if (cartDropdownWrapper) {
                         cartDropdownWrapper.innerHTML = data.cart_html;
                     }
@@ -53,6 +50,33 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    document.addEventListener('click', function (e) {
+        if (e.target.matches('.qty-remove')) {
+            const itemId = e.target.dataset.itemId;
+            updateQuantity(itemId, 'remove');
+        }
+    });
+
+    function updateCartDropdown() {
+        let url = `/store/cart/get/dropdown/`;
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCSRFToken(),
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const wrapper = document.querySelector('.cart-dropdown-wrapper');
+                if (wrapper) {
+                    wrapper.innerHTML = data.cart_html;
+                }
+            })
+            .catch(error => console.error("Update error:", error));
+    }
+
     function updateQuantity(itemId, action) {
         let url = '';
 
@@ -60,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
             url = `/store/cart/item/${itemId}/increase/`;
         } else if (action === 'decrease') {
             url = `/store/cart/item/${itemId}/decrease/`;
+        } else if (action === 'remove') {
+            url = `/store/cart/item/${itemId}/remove/`;
         }
 
         fetch(url, {
@@ -87,8 +113,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (cartCount && data.item_count !== undefined) {
                     cartCount.textContent = data.item_count;
                 }
+                if (data.item_count == 0) {
+                    updateCartDropdown();
+                }
             })
-            .catch(error => console.error("Fehler beim Aktualisieren:", error));
+            .catch(error => console.error("Update error:", error));
     }
 
 

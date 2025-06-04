@@ -11,6 +11,10 @@ User = get_user_model()
 class Index(TemplateView):
     template_name = 'index.html'
 
+class About(TemplateView):
+    template_name = 'about.html'
+
+    
 class Login(LoginView):
     template_name = 'accounts/login.html'
 
