@@ -15,8 +15,8 @@ ENV DJANGO_SETTINGS_MODULE=vittrigas.settings
 ENV PYTHONPATH=/app
 
 # Optional: Create the static root folder if needed
-RUN mkdir -p /app/staticfiles
+# RUN mkdir -p /app/staticfiles
 
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 CMD ["gunicorn", "vittrigas.wsgi:application", "--bind", "0.0.0.0:8080"]
