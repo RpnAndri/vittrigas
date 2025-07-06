@@ -2,7 +2,6 @@ Django==5.2.1
 django-bootstrap3==25.1
 django-bootstrap5==25.1
 django-braces==1.17.0
-misaka==2.1.1
 numpy==2.2.4
 pillow==11.1.0
 sqlparse==0.5.3
