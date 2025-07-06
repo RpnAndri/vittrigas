@@ -28,4 +28,4 @@ RUN mkdir -p /app/vittrigas/staticfiles
 RUN python manage.py collectstatic --noinput
 
 # Run app
-CMD ["gunicorn", "vittrigas.vittrigas.wsgi:application", "--bind", "0.0.0.0:8080"]
+CMD ["gunicorn", "vittrigas.wsgi:application", "--bind", "0.0.0.0:8080"]
