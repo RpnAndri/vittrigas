@@ -1,22 +1,31 @@
 FROM python:3.11-slim
 
+# Prevent .pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# Set initial working directory
 WORKDIR /app
 
+# Copy and install dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Copy the entire repo
 COPY . .
 
-# Ensure environment is ready for collectstatic
-ENV DJANGO_SETTINGS_MODULE=vittrigas.settings
-ENV PYTHONPATH=/app
+# Change to Django root directory
+WORKDIR /app/vittrigas
 
-# Optional: Create the static root folder if needed
-# RUN mkdir -p /app/staticfiles
+# Environment setup
+ENV DJANGO_SETTINGS_MODULE=vittrigas.vittrigas.settings
+ENV PYTHONPATH=/app/vittrigas
 
-# RUN python manage.py collectstatic --noinput
+# Set up static file output directory
+RUN mkdir -p /app/vittrigas/staticfiles
 
-CMD ["gunicorn", "vittrigas.wsgi:application", "--bind", "0.0.0.0:8080"]
+# Run collectstatic
+RUN python manage.py collectstatic --noinput
+
+# Run app
+CMD ["gunicorn", "vittrigas.vittrigas.wsgi:application", "--bind", "0.0.0.0:8080"]
