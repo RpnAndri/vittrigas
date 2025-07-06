@@ -18,7 +18,7 @@ COPY . .
 WORKDIR /app/vittrigas
 
 # Environment setup
-ENV DJANGO_SETTINGS_MODULE=vittrigas.vittrigas.settings
+ENV DJANGO_SETTINGS_MODULE=vittrigas.settings
 ENV PYTHONPATH=/app/vittrigas
 
 # Set up static file output directory
