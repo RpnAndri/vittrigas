@@ -1,29 +1,22 @@
 FROM python:3.11-slim
 
-# Prevent .pyc files
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set working directory
 WORKDIR /app
 
-# Install dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy project files
 COPY . .
 
-# Move into the Django subfolder to run commands
-WORKDIR /app/vittrigas
+# Ensure environment is ready for collectstatic
+ENV DJANGO_SETTINGS_MODULE=vittrigas.settings
+ENV PYTHONPATH=/app
 
-# Sanity Check
-RUN echo "✅ Dockerfile executed! Vercel is using Docker!"
+# Optional: Create the static root folder if needed
+RUN mkdir -p /app/staticfiles
 
-
-# Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Run using Gunicorn
 CMD ["gunicorn", "vittrigas.wsgi:application", "--bind", "0.0.0.0:8080"]
-
