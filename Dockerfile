@@ -22,6 +22,7 @@ WORKDIR /app/vittrigas
 # Environment setup
 ENV DJANGO_SETTINGS_MODULE=vittrigas.settings
 ENV PYTHONPATH=/app/vittrigas
+ENV SERVE_MEDIA=True
 
 # Set up static file output directory
 RUN mkdir -p /app/vittrigas/staticfiles

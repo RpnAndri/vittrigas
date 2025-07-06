@@ -23,7 +23,6 @@ from django.conf.urls.static import static
 
 from . views import Index, Login, SignUp, About
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Index.as_view(), name='index'),
@@ -34,7 +33,4 @@ urlpatterns = [
     path('about/', About.as_view(), name='about'),
     # path('success/', Success.as_view(), name='success'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Media URL config (DO NOT USE IN ACTUAL PROJECTS)
-
-
-
 
