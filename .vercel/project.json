@@ -1,7 +1,0 @@
-{
-  "framework": "other",
-  "ignoreCommand": "echo 'Ignoring build'",
-  "outputDirectory": ".",
-  "buildCommand": "",
-  "devCommand": ""
-}
