@@ -33,9 +33,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('about/', About.as_view(), name='about'),
     # path('success/', Success.as_view(), name='success'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Media URL config (DO NOT USE IN ACTUAL PROJECTS)
 
 
-# Media URL config (development only)
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

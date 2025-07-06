@@ -14,6 +14,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the entire repo
 COPY . .
 
+COPY vittrigas/media/ /app/media/
+
 # Change to Django root directory
 WORKDIR /app/vittrigas
 
